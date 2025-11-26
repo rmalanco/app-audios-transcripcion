@@ -1,0 +1,112 @@
+{
+  "id": "a1f76eb9-3f2b-4c19-899c-9c14c660c0b4",
+  "text": "No les diré mi nombre, ya que te hemos rechazado, desde que tengo memoria, siempre fui criticado. Soy de esas personas que siempre he sufrido bullying, a pesar de que ahora ya tengo 20 años. Desde que iba en la primaria ya me decían gordo, negro y muchos apodos ofensivos. Cuando descubrí que me atraían las personas en mi mismo sexo, el problema se atresentó y en la preparatoria me insultaba. Las necesidades de mi cuerpo me hacían comer demasiado y cuando veía a las personas del ganas quería estar así. Y se me hizo costumbre vomitar después de un rato de comer. Un amigo me recomendó tomar anfetaminas, con eso él había bajado de peso, así que lo hice y pronto se me hizo adicción. No sé qué químicos tenga eso, pero cada vez quería más y más. Ya no podía ni concentrarme en lo que hacía, no dormía y siempre quería más. No trabajaba, así que me volvi un delincuente para poder tener dinero para mi adicción. Después ya le hacía todo y nada de eso me dio la felicidad. Estoy muy enfermo a punto de morir, postrado en mi cama, inyectándome mi última dosis de heroína antes de partir. Nadie sabe de mí, ni mis padres, ya que dejé todo y me vine a vivir a una posilga, con un amigo con los mismos gustos que yo. Aunque a él lo mataron hace dos meses y lo único que puedo decir es que hubiese querido encontrar personas que me comprendieran y aceptaran, si no me matan las drogas, la soledad lo hará. Si conoces a alguien como yo, no lo juzgués y se más tolerante. Las palabras malintencionadas también matan lentamente.",
+  "language": "es",
+  "segments": [
+    {
+      "id": 0,
+      "start": 0.0,
+      "end": 13.08,
+      "text": "No les diré mi nombre, ya que te hemos rechazado, desde que tengo memoria, siempre fui criticado."
+    },
+    {
+      "id": 1,
+      "start": 13.08,
+      "end": 20.16,
+      "text": "Soy de esas personas que siempre he sufrido bullying, a pesar de que ahora ya tengo 20 años."
+    },
+    {
+      "id": 2,
+      "start": 20.16,
+      "end": 26.88,
+      "text": "Desde que iba en la primaria ya me decían gordo, negro y muchos apodos ofensivos. Cuando"
+    },
+    {
+      "id": 3,
+      "start": 26.88,
+      "end": 34.44,
+      "text": "descubrí que me atraían las personas en mi mismo sexo, el problema se atresentó y en la preparatoria"
+    },
+    {
+      "id": 4,
+      "start": 34.44,
+      "end": 42.76,
+      "text": "me insultaba. Las necesidades de mi cuerpo me hacían comer demasiado y cuando veía a las personas"
+    },
+    {
+      "id": 5,
+      "start": 42.76,
+      "end": 49.64,
+      "text": "del ganas quería estar así. Y se me hizo costumbre vomitar después de un rato de comer."
+    },
+    {
+      "id": 6,
+      "start": 50.52,
+      "end": 58.52,
+      "text": "Un amigo me recomendó tomar anfetaminas, con eso él había bajado de peso, así que lo hice y"
+    },
+    {
+      "id": 7,
+      "start": 58.52,
+      "end": 66.52,
+      "text": "pronto se me hizo adicción. No sé qué químicos tenga eso, pero cada vez quería más y más."
+    },
+    {
+      "id": 8,
+      "start": 67.52,
+      "end": 74.52,
+      "text": "Ya no podía ni concentrarme en lo que hacía, no dormía y siempre quería más."
+    },
+    {
+      "id": 9,
+      "start": 75.47999999999999,
+      "end": 82.52,
+      "text": "No trabajaba, así que me volvi un delincuente para poder tener dinero para mi adicción."
+    },
+    {
+      "id": 10,
+      "start": 82.52,
+      "end": 91.32,
+      "text": "Después ya le hacía todo y nada de eso me dio la felicidad. Estoy muy enfermo a punto de morir,"
+    },
+    {
+      "id": 11,
+      "start": 91.32,
+      "end": 98.39999999999999,
+      "text": "postrado en mi cama, inyectándome mi última dosis de heroína antes de partir."
+    },
+    {
+      "id": 12,
+      "start": 99.2,
+      "end": 107.7,
+      "text": "Nadie sabe de mí, ni mis padres, ya que dejé todo y me vine a vivir a una posilga, con un"
+    },
+    {
+      "id": 13,
+      "start": 107.7,
+      "end": 116.24000000000001,
+      "text": "amigo con los mismos gustos que yo. Aunque a él lo mataron hace dos meses y lo único que puedo decir"
+    },
+    {
+      "id": 14,
+      "start": 116.24000000000001,
+      "end": 124.08000000000001,
+      "text": "es que hubiese querido encontrar personas que me comprendieran y aceptaran, si no me matan"
+    },
+    {
+      "id": 15,
+      "start": 124.08,
+      "end": 131.16,
+      "text": "las drogas, la soledad lo hará. Si conoces a alguien como yo, no lo juzgués y se"
+    },
+    {
+      "id": 16,
+      "start": 131.16,
+      "end": 137.56,
+      "text": "más tolerante. Las palabras malintencionadas también matan lentamente."
+    }
+  ],
+  "filename": "whisper_83c8e5c075b544a1aaa3e1080e11cc62_Audio_2025-11-25_08-16-57_p_m.wav",
+  "duration": 0,
+  "created_at": "2025-11-25T22:02:52.517986"
+}

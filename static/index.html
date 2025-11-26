@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcripción de Audio a Texto</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎤 Transcripción de Audio a Texto</h1>
+            <p class="subtitle">Convierte tus archivos de audio en texto usando inteligencia artificial</p>
+        </header>
+
+        <main>
+            <!-- Zona de carga de archivos -->
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <h2>Arrastra tu archivo de audio aquí</h2>
+                        <p>o haz clic para seleccionar</p>
+                        <p class="formats">Formatos soportados: WAV, MP3, M4A, OGG, FLAC, WEBM, MP4</p>
+                    </div>
+                    <input type="file" id="fileInput" accept="audio/*,video/*" hidden>
+                </div>
+
+                <!-- Modo de procesamiento -->
+                <div class="mode-selector">
+                    <button class="mode-btn active" id="singleModeBtn">Archivo Individual</button>
+                    <button class="mode-btn" id="batchModeBtn">Procesamiento por Lotes</button>
+                </div>
+
+                <!-- Controles de lote (ocultos por defecto) -->
+                <div class="batch-controls" id="batchControls" style="display: none;">
+                    <div class="file-list" id="fileList"></div>
+                    <div class="batch-actions">
+                        <button class="btn btn-secondary" id="clearBatchBtn">Limpiar Lista</button>
+                        <button class="btn btn-primary" id="transcribeBatchBtn" disabled>Transcribir Lote</button>
+                    </div>
+                </div>
+
+                <!-- Opciones de transcripción -->
+                <div class="options">
+                    <div class="option-group">
+                        <label for="language">Idioma (opcional):</label>
+                        <select id="language">
+                            <option value="">Auto-detectar</option>
+                            <option value="es">Español</option>
+                            <option value="en">Inglés</option>
+                            <option value="fr">Francés</option>
+                            <option value="de">Alemán</option>
+                            <option value="it">Italiano</option>
+                            <option value="pt">Portugués</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="task">Tarea:</label>
+                        <select id="task">
+                            <option value="transcribe">Transcribir</option>
+                            <option value="translate">Traducir a inglés</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="outputFormats">Formatos de salida:</label>
+                        <div class="format-checkboxes" id="outputFormats">
+                            <label><input type="checkbox" value="txt" checked> TXT</label>
+                            <label><input type="checkbox" value="srt"> SRT</label>
+                            <label><input type="checkbox" value="vtt"> VTT</label>
+                            <label><input type="checkbox" value="json"> JSON</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información del archivo seleccionado -->
+            <div class="file-info" id="fileInfo" style="display: none;">
+                <div class="file-details">
+                    <span class="file-name" id="fileName"></span>
+                    <span class="file-size" id="fileSize"></span>
+                </div>
+                <button class="btn btn-primary" id="transcribeBtn">Transcribir Audio</button>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Procesando audio...</p>
+            </div>
+
+            <!-- Resultados -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2>Transcripción</h2>
+                    <div class="results-actions">
+                        <button class="btn btn-secondary" id="copyBtn">📋 Copiar</button>
+                        <button class="btn btn-secondary" id="downloadBtn">💾 TXT</button>
+                        <button class="btn btn-secondary" id="downloadSrtBtn">🎬 SRT</button>
+                        <button class="btn btn-secondary" id="downloadVttBtn">🎬 VTT</button>
+                        <button class="btn btn-secondary" id="downloadJsonBtn">📄 JSON</button>
+                    </div>
+                </div>
+                
+                <div class="transcription-info">
+                    <span class="info-badge" id="languageBadge"></span>
+                    <span class="info-badge" id="durationBadge"></span>
+                </div>
+
+                <div class="transcription-text" id="transcriptionText"></div>
+
+                <!-- Segmentos con timestamps -->
+                <div class="segments" id="segments"></div>
+            </div>
+
+            <!-- Estado de conexión WebSocket -->
+            <div class="websocket-status" id="websocketStatus">
+                <span class="status-indicator" id="statusIndicator">●</span>
+                <span id="statusText">Conectando...</span>
+            </div>
+
+            <!-- Mensajes de error -->
+            <div class="error-message" id="errorMessage" style="display: none;"></div>
+        </main>
+
+        <footer>
+            <p>Powered by OpenAI Whisper | Versión Reforzada 2.0</p>
+            <div class="footer-links">
+                <a href="/docs">📚 API Docs</a> |
+                <a href="/health">💚 Health Check</a> |
+                <a href="https://github.com/openai/whisper" target="_blank">🔗 Whisper</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+

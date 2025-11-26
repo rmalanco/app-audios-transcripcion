@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# FastAPI
+*.db
+*.sqlite
+
+# Archivos de audio y transcripciones
+uploads/
+transcripts/
+*.wav
+*.mp3
+*.m4a
+*.ogg
+*.flac
+*.webm
+*.mp4
+
+# Variables de entorno
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Modelos de Whisper (opcional, pueden ser grandes)
+*.pt
+*.bin
+
