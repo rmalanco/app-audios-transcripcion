@@ -28,14 +28,33 @@ logger = logging.getLogger(__name__)
 warnings.filterwarnings("ignore", message="FP16 is not supported on CPU")
 
 import whisper
-from fastapi import FastAPI, File, UploadFile, HTTPException, BackgroundTasks, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, File, UploadFile, HTTPException, BackgroundTasks, WebSocket, WebSocketDisconnect, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import uvicorn
+from sqlalchemy.orm import Session
+from fastapi.security import OAuth2PasswordRequestForm
+from datetime import timedelta
+
+# Importaciones locales
+import models
+import auth
+from database import engine, get_db
+
+# Crear tablas en la base de datos
+models.Base.metadata.create_all(bind=engine)
 
 # Modelos Pydantic para validación
+class UserCreate(BaseModel):
+    email: str
+    password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
 class TranscriptionRequest(BaseModel):
     language: Optional[str] = None
     task: str = "transcribe"
@@ -58,7 +77,7 @@ class TranscriptionResult(BaseModel):
 
 # Configuración
 MAX_FILE_SIZE = 500 * 1024 * 1024  # 500MB
-SUPPORTED_FORMATS = {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".webm", ".mp4"}
+SUPPORTED_FORMATS = {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".webm", ".mp4", ".wmv"}
 WHISPER_MODELS = ["tiny", "base", "small", "medium", "large"]
 
 app = FastAPI(
@@ -404,13 +423,43 @@ async def health():
         "timestamp": datetime.now().isoformat()
     }
 
+@app.post("/register", response_model=Token)
+def register(user: UserCreate, db: Session = Depends(get_db)):
+    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    hashed_password = auth.get_password_hash(user.password)
+    db_user = models.User(email=user.email, hashed_password=hashed_password)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    access_token = auth.create_access_token(data={"sub": user.email})
+    return {"access_token": access_token, "token_type": "bearer"}
+
+@app.post("/token", response_model=Token)
+async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.email == form_data.username).first()
+    if not user or not auth.verify_password(form_data.password, user.hashed_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token_expires = timedelta(minutes=auth.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = auth.create_access_token(
+        data={"sub": user.email}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+
 @app.post("/transcribe")
 async def transcribe_audio(
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     language: Optional[str] = None,
     task: str = "transcribe",
-    output_formats: List[str] = ["txt"]
+    output_formats: List[str] = ["txt"],
+    current_user: models.User = Depends(auth.get_current_user),
+    db: Session = Depends(get_db)
 ):
     """
     Transcribe un archivo de audio a texto
@@ -541,6 +590,23 @@ async def transcribe_audio(
                 output_files["json"] = str(json_file)
 
         result["output_files"] = output_files
+        
+        # Guardar en base de datos
+        db_transcript = models.Transcript(
+            filename=file.filename,
+            text=result["text"],
+            language=result["language"],
+            duration=result["duration"],
+            user_id=current_user.id,
+            file_path=output_files.get("txt", "") # Guardamos la ruta del TXT como referencia
+        )
+        db.add(db_transcript)
+        db.commit()
+        db.refresh(db_transcript)
+        
+        # Añadir ID de base de datos al resultado
+        result["db_id"] = db_transcript.id
+        
         return JSONResponse(content=result)
 
     except Exception as e:
@@ -631,17 +697,12 @@ async def batch_transcribe(request: BatchTranscriptionRequest):
     }
 
 @app.get("/transcripts")
-async def list_transcripts():
-    """Lista todas las transcripciones guardadas"""
-    transcripts = []
-    for file in TRANSCRIPTS_DIR.glob("*"):
-        if file.is_file():
-            transcripts.append({
-                "filename": file.name,
-                "size": file.stat().st_size,
-                "modified": file.stat().st_mtime,
-                "extension": file.suffix
-            })
+async def list_transcripts(
+    current_user: models.User = Depends(auth.get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Lista las transcripciones del usuario actual"""
+    transcripts = db.query(models.Transcript).filter(models.Transcript.user_id == current_user.id).all()
     return {"transcripts": transcripts}
 
 @app.get("/transcripts/{filename}")

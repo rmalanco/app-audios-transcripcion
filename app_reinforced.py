@@ -58,7 +58,7 @@ class TranscriptionResult(BaseModel):
 
 # Configuración
 MAX_FILE_SIZE = 500 * 1024 * 1024  # 500MB
-SUPPORTED_FORMATS = {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".webm", ".mp4"}
+SUPPORTED_FORMATS = {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".webm", ".mp4", ".wmv"}
 WHISPER_MODELS = ["tiny", "base", "small", "medium", "large"]
 
 app = FastAPI(

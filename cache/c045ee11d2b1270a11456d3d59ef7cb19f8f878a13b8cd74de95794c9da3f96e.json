@@ -1,0 +1,2092 @@
+{
+  "id": "d693bdfe-c5af-43d8-9d22-fc9ab5f59fd1",
+  "text": "y estamos presentando el día de gol como parte del equipo de AMS soft tech la propuesta de solución del polo mejora 1041 e 1428 donde estaríamos solucionando una genera de tiendas a partir de un par de chip y no de un final chip aquí nos estaría apoyando para esta presentación mi compañero Francisco adelante franc por favor gracias bueno gratis equipo por tiempo vamos a presentar tu puesta solucion para el polo mejora de generación de tiendas a partir del par de chip está a ser un poco de la tienda que vamos a llevar hoy como antecedente se tiene que dentro del proyecto de texcoco al realizar la reintinería los procesos que abarcan los diferentes tipos de esportido dentro de la fase 1 han estado presentando coincidencias en los últimos meses donde debido a los problemas de integración que se tienen actualmente del sistema de negado y contra el tema de Manhattan ha estado revelando hay algunas pequeñas coincidencias con respecto a los datos que salen contra los que llegan por lo tanto como puntos relevantes tenemos actualmente que en la salida depende principalmente de que la integración del sistema de Manhattan se complete en su totalidad con la operación de la bodega y su respectivo sistema estos datos por retrasos en la espera de la transferencia respecto a la integración en sistema de negado ha estado generando que la titácoras o la información para terminar de procesar una caja depende totalmente de la producción del procesamiento de todas las cajas para poder dar salida en la mercancía y esto pues conlleva a muchos otros problemas consecuencias como condición actual tenemos que actualmente el proceso de salida de texcoco donde se conviene de el tema de Manhattan para integrarse en los sistemas de negado corresponde principalmente a que esta integración su función principal es generar la titácoras y todos los documentos que sean necesitarios respecto al inventario para poder salir de dar salida dicha me cantiara como ya les ha estado mencionando anteriormente el hecho de depender totalmente de la integración de los datos el sistema de negado ha permitido que se engenere una ventitud en los procesos de la salida de la mercancía y pues que se tengan unas altas por nada de espera por debido a los datos que están por integrarse y poder dar salida en la escáfora dentro de los procesos involucrados para la salida de mercancía tenemos los úpidos que las entregas al cliente el unisorte y los pasados como dependencias pues tenemos el sistema de Manhattan para la cuestión de armas enéxil temas de negado directamente para la generación de la documentación de la titácoras como impacto al tener todo este tipo de dependencia tenemos que excitar un retraso en la espera de la integración entre los datos estas incidencias frecuentes en los últimos meses se angenerando por fallas de la sincronización o datos que quedan volados en espera para poder ser integrados en la parte de datos delegados y pues esto está fallado de integración de los datos genera ciertos bloqueos en los procesos de la oficina control para que se pueda integrar completamente muchos datos estos datos que al permanecer en espera generan tiempos prolongados de espera principalmente en operación de la oficina y pues esto puede conllevar a los 10 dos de las entregas y un aumento de la carga operativa por lo tanto esta integración de los datos al vez afectada pues no se puede generar dicha vita cora para dar salida a la mercancía parte de la de la análisis que se llevo a cabo dentro de la mejora es que bueno se encontró que dentro de la parta de la documentación cuando se contaba con documentos completos del proceso que pudieran generar un mapego adecuado del flujo y así poder mejorar dicha dicha actividad en el proceso es que actualmente el flujo depende totalmente de que los datos sean integrados en el sistema delegado para dar salida a las cajas completas el método actualmente depende de que el proceso de la nube se integre completamente el sistema delegado para dar salida a las mercancías y esta espera pues está generando tiempos de esperándose en el proceso por lo tanto del lado del aspecto del personal se tiene que pues estar generando por el sistema antes de trabajo y pues ha derivado en algunos casos en que se produzca cierto nivel de estrés derivado de que se requiere que todos los pedidos sean procesados para dar salida a la mercancía aquí vemos un poquito del flujo actual que he llevado a cabo con respecto al proceso donde bueno otra vez del badge job que llega desde el sistema de Manhattan y al momento de publicar un mensaje de tipo parcial está recibida por los componentes de la fase 1 donde de entrada pues va a guardar el estado actual del flujo en las bases de datos correspondientes del negado en este caso en la parte de la nube correspondiente y posteriormente a que es procesado por parcialidad al recibir los mensajes del del sheet confirm pues ir timbrando poco a poco los pedidos para una vez timbrados pues integren los datos del negado aquí en la línea puntiada verde podemos ver que se piensa aplicar la mejora en todos los componentes que es más referentes a la fase 1 de las parcialidades que incluyen el sultido la entrega clientes el unikzorter y los traspasos donde pues la mejora que se piensa aplicar es que en vez de ser los pedidos procesados por toda la caja o espera que todas las cajas terminan de procesarte se genera una parcialidad por cada pedido y una vez que llegue de último pedido de dicho de dicha caja se procese como completado para poder dar esa alidad y chaman cancia dentro del arquitectura actual pues como lo hemos estado mencionando se tiene una dependencia total de integración entre el sistema de manja tan el negado donde la comunicación principal mente se realiza a través del un mensaje de chip confirm lo que integra la parcialidad entre las bases y todo todo lo que conlleva en la clube como limitación actual es que puede existir un bloqueo de tablas y el necolamiento de las transacciones se tiene una basa de movilidad sobre el estado actual de la integración y hay una dependencia total de mi prestultura del proceso como la propuesta técnica es que bueno se va a migrar la capa de integración para hacer tomar directamente desde los datos que provienen de la nube y este consumo directo de los datos de la nube pretende manejar los datos de una manera más eficiente para eliminar dichas esperas y a su vez pues te vaya integrando con el cpede y para que vaya timprando las órdenes con fondo te van llegando los dachos el objetivo es que con esto se lo ve una mejora significativa en los tiempos de ejecución principalmente en las salidas de la mercancía relacionada a los componentes de la parcialidad para enfocar en la eliminación de la parte de la integración de los datos delegados para evitar esperar interminable con respecto a que se terminan de integrar dichos datos para la salida a la mercancía con el punto de tomarlo directamente de las nube y con ello a utilizar este proceso por lo tanto la propuesta de solución busca busca solucionar los siguientes criterios de centración que en el primero sea que va a generar un pedido a cada parcialidad cuando se reciba el saje del parcial chief confirm en donde este este plujo debe mantener el tracking en las bases datos de la nube para saber qué tipo de movimientos está realizando y este cambio va a ser aplicado a los grupos de la salida como ya lo hemos estado mencionando serían los sentidos a la tienda la entrega a los clientes y los pasos y por último lo que les mencionaba en el diagrama que en vez de procesar un pedido como completo o hasta que se como plete cada pedido va a llegar como una parcialidad va a ser marcado más que una esquema de la letra P y el último pedido que llegue va a ser marcado va a ser una letra C como completo esto le va a dar a entender al sistema que una vez que esté completado ya no va a tener que esperar a la última casa que sea procesada para poder dar salida a la mercancía con ello pues aquí alizar dicho proceso de salida como beneficio pues tenemos la reducción de los tiempos la actividad del proceso se va a disminuir el retraso de la entrega que entres y tiendas en su caso se va a optimizar las actividades en la piscina control mejorando y reduciendo los jornales de extemo antes que últimamente han estado presentando con ellos se mejora la productividad operativa y al migrar a la nube pues tenemos otros beneficios adicionales como la escabarres calabilidad la seguridad de los datos la mejor visibilidad de los procesos y la extensión de la vida útil del sistema como alcance tenemos que estar capaz de integración de datos se va a aplicar en los componentes relacionados en las parcialidades referentes a la etapa de la fase uno del proceso que son los de su tido le entregan siguientes del yón el sortes de espasos como consideración es que vamos a evitar el bloqueo de tables para no provocar en colamientos y que las bichas transacciones manejen un tiempo de respuesta elevado para que no entorpesca otros procesos consecuencias aquí manejamos una fecha aproximada donde la fecha de codificación es ya se comenzó la fecha de codificación para ver el cambio tenemos planeado realizar las pruebas a partir del día de diciembre y aquí como una nota pequeña se manejo la fecha de liberación respetando el calendario de liberación seguras a través del cap donde marcamos el siete enero sin embargo se estaria buscando el apoyo del equipo para poder liberar un poco antes debido a que pues sabemos que esto es un tema prioritario como supuesto restricción tenemos que el inventario puede estar disponible para las alidas la recepción en la ciencia debe consumir la información de este valor como actualmente se procesa en la nube el timbrado debe estar disponible para la dicha documentación debemos evitar el bloqueo de las tablas para notos entorpesar los procesos consecuentes o este lo que hablaba hace datos y estas transacciones pueden mantener los tiempos de respuesta elevados para procesar rápidamente los datos toda la transacción debe ser sincrona y pues no debe de de agradar actualmente el proceso que se está llevando a cabo de acuerdo a los picos de demanda que se tiene y pues esto es de esta parte de este focho y así ok eso que muestro es entiendo ya en el momento le vamos practicado con carlita me puedes mostrar cuál es el dictamente técnico cuál va a ser tu impacto técnico que componentes vas a modificar si te pasó los nombres en el chat no lo incluyen en la presentación no es parte de los manejamos de manera general de dejarme de cuento el diagrama principalmente ayer como tal aquí principalmente se va a manejar en los componentes de la parcialidad llevan por nombre de ese guion partial ship guion y un esortes guion client guion translate y me parece que lo llamo entonces bueno a lo que entiendo actualmente el servicio es el bswm se batchó contempla solamente los mensajes del tópico que viene siendo full chipman y final chipman y ahora el cambio que harían en el servicio sería que contempla también las parcialidades de cada uno no sé si me escuché correcto actualmente pues está manejando de esta manera los pedidos donde pues le llega a este chipman de esta manera el chipman lo que se busca es que es que es el que se hace por pedido entonces el que por lo de charcel que pedido se entiende que la estructura actual ya está construida para que una vez que se complete un pedido pueda dar la mercancía por lo tanto que pueda desplogiar la previa la previa es pletada si es que se tiene que ver pues salida del estátua estátua correcto ahora no es que no depender de que por ejemplo llegan tres cazas que la cada uno termines el procesada a dar salida a la cazas tres o a las tres cazas sino que conforme se termine en la caza uno se complete y le pueda dar salida llegan a cazas dos se procesa de complete y puede dar salida o sea que vayan cada y anorreciera que es que se proceden las tres cazas al mismo tiempo para poder dar salida a la caza que era la depender de todo el que estuvo y bueno más sería que cuando tu collieras van a las pruebas probar ese flujo de que de las parcialidades de que cuando mandes una caja de que se haga el pedido para esa caja y deje pendiente los demás correcto para que al final me imagino que te he detectado cuando llega la última caja que sería una fina chico firma en el tema de las parcialidades para ir que al último pedido le pudiera que en base a ese mensaje le pudiera poner la la sé cómo se mencionaba en la presentación que es un pedido completo si si si menciones que los demás componentes que son los que interan en el negado y están preparados para un consumo por por paquetes por decirlo así en las parcialidades pues estaría bien con más que de la הי, muy bien. Vale. Bueno antes nos nos va a responder rafan nada más para comentarles, vamos a presentar una segunda propuesta de mejora. Rafa si me puedes apoyar a ir presentando a Yaví, nada más como una pequeña introducción, pues del folio mejora es el 10-41-14903. Bueno, flujo de unit-sortes utilizando únicamente full chip, aquí les vamos a estar comentando, básicamente, una optimización que se estará realizando un proceso de unit-sortes y, bueno, adelante, Rafa con dos detalles, por favor. Bueno, así que, buenas tardes a todos, ya como me presento mi compañera, mi nombre es Rafa el Malanco, por tenés cosa, IX, soy de MES, copial, LL3. Hoy presentamos la propuesta de mejora del folio de mejora el 10-41-1493, que es automatizar el flujo de unit-sortes utilizando únicamente full chip, esto para sediste escoco eliminando la intervención manual de oficinas con drole. Ahora, así que les cuento cómo lo haremos. Esto es la descripción de la agenda que llevaremos en la presentación, que lo cual incluye 6 puntos. Vamos con la descripción. En cuestión de la descripción de mejora, esta mejora optimiza el procesamiento de mensajes de unit-sortes en el sistema WMS de copial, mediante la implementación de un flujo dual de automatizado. Actualmente, el código del módulo de Robapilot Processor está diseñado para ejecutar una sola fase de procesamiento, lo que requiere complemento manual para completar el ciclo de la integración de datos desde Manhattan del WM, hacia el sistema alegado. Ahora, así en contexto de la mejora, los tres puntos claves o en primero la arquitectura base sólida, el sistema ya cuenta con una cadena funcional que es del Bass Job hacia el Pub-Sub hacia full sheet y unisorter, y este hacía la librería de salida service y el Robapilot Processor procesa correctamente la primera fase, pero el surgido mercancía, el primer fase que se surgió mercancía y como segundo, que es el área de oportunidad identificada, implementa el procesamiento implementar el procesamiento dual, completo requiere requerido por el criatura de aceptación 2, donde cada mensaje se procesa secuencialmente, primero se ejecutará salida subdido service con el método salida subdido, y luego salida mercancía service, ejecutará el método de salida mercancía, eliminando los pasos manuales como tercero beneficios operativos, la automatización completa del ciclo de órdenes de unisorter, eliminando la dependencia de intervención manual por parte del área de fiscinas control y mejorando la eficiencia y reduciendo tiempos de respuesta, donde estamos hoy, como contexto general, la situación actual plantea las siguientes preguntas que el sistema tenemos actualmente, en WMS Copiel recibe las órdenes de subdido de Manhattan, el sistema de almacén de service, y unisorter es el sistema de automatizado que clasifica ropa para envío directo a tiendas, como en infraestructura base, funcionando correctamente, y como identificamos el orden de unisorter, las órdenes de unisorter tienen los preficos ID igual a DOP, identifica las órdenes de subdido para tiendas, ordentime igual a Flow to Round, y mercancía pasa directo sin almacenarse, y Destination Facility ID, inicia con la letra T, destino es una tiendas específica, que podemos mejorar en el código, el ropa peluad procesor actualmente ejecuta solamente la primera fase que podemos identificar lo que es el método de salida surtido, que existe y existe actualmente lo que se llama salida mercancía service, está disponible, pero no está integrado para órdenes de unisorter, en cuestión de oportunidad mejora se puede implementar el puente de la conversión entre los dos modelos que uno de ellos se llama Jason Salida Surtido, Asia, Jason Salida, Mercancía Model, que ganamos con esta mejora, se registra que sale del almacen, Surtido, esto ya funciona, lo nuevo se registrará automáticamente la confirmación final del envío, que es Mercancía, resultado, la automatización completa del proceso sin intervención manual, ahora veamos el valor, el valor se puede considerar como alto impacto, la automatización completa de confirmaciones atiendas, una reducción de tiempos de entre 15 y 30 minutos, a solamente 2 a 3 minutos por envío, que pueden ser dependiendo de la carga de trabajo, pueden ser cientos diarios o dependiendo de la tipo de tráfico, eliminación de errores manual, la escalabilidad lista para TESCOC, como centro principal de zona centro, se puede considerar también como baja complejidad, los servicios ya existen y están probados sin cambio en base de datos, ni infraestructura, ni arquitectura, y la arquitectura está preparada para la ejecución dual y la reutilización de código, así continuemos en análisis técnico de oportunidad de mejora, usamos un análisis de causa raíz ubicando la mejora en alto impacto baja dificultad por la metodología, como lo podemos ver, el diseño inicial fue base única, ahora entendemos, extendemos a ejecución dual con documentación disponible, por tecnología fase 1 lista para la extensión, en salida mercancías, ahora sí está disponible, por infraestructura de login está lista en cuestión para trazabilidad, y por personas o oportunidad de integrar conocimientos entre los equipos, requisitos completos identificados, y por el proceso fase 1 está operativa, fase 2 disponible para implementar y automatización completa es factible o está disponible en cuestión, ahora vamos a la siguiente que es el flujo funcional, en el diagrama muestra el flujo completo, como se puede visualizar, tenemos lo que es el maghatan www, que genera las órdenes, este a su vez lo manda a base job, que procesa y publica al Pubsob, este a su vez lo manda directamente a full chip y unisorter, que consume el mensaje a través de los procesos internos, se llama ropa peluad procesor, que esta a su vez de ser realiza, y este ejecuta los nuevos métodos que se van a implementar, que es proces dual item, que ejecuta primero la fase que es la deshurtido con salida a suurtido service, y al terminar da un ok, que convertimos los datos y lanzamos la fase 2 que es la de mercancía, con salida mercancía a service, el resultado llega a sistema alegado, con esto el ciclo queda completo y trazable sin intervención manual, qué componentes tocamos, la propuesta optimiza lo que se llama ropa peluad procesor, implementando el procesamiento dual el secuencial, manteniendo la compatibilidad con la arquitectura de abstract peluad procesor, y los critores de aceptación que son consumir el full chip de unisorter con los prefijos ya mencionados antes que es docter row, destination facilite y con la inicialización de T, el criterio de aceptación 2, que es procesar dos veces primero el surtido, luego mercancía y criterio de aceptación 3, grabar en el tracknade de la 9 de Coppel para la trasabilidad completa, únicos módulos a modificar van a ser el full chip y unisorter en ropa peluad procesor, que los cuales vamos a hacer la inyección de salir a mercancía para implementar los dos métodos que se llama proces dual item y el mapo que se llama map2 mercancía model, continuamos, que es la arquitectura de cambios, en si los cambios van a ser en ropa peluad procesor ubicado en el servicio en las carpetas internas que se llama Coppel procesors y las mejoras serían con no habíamos mencionado antes que es primero la inyección de salidas, salida, mercancía a service en el constructor, reutilizando el servicio existente, el nuevo método de proces dual item que implementa el criterio de aceptación 2 con procesamiento secuencial, como punto 3 el nuevo método de map2 mercancía model con la conversión sin modificar los de Teos Existentes, como punto 4 el lo que informativo con los orden ID y el OLEPN para mejorar la trazabilidad, como punto 2 tenemos lo que es el map de los modelos que es la conversión de los datos entre iesos salidas, sortido model y iesos salida mercancía model, los campos que se van a utilizar para este map o van a ser el master que toma el OLEPN del sortido, caja toma el nunco digo del primer detalle en fecha de lo LPN y tipo guía convierte de un string a un short y factura convierte de 5 1 a un string continuamos el siguiente es pruebas y un icódigo clave aquí les puede mostrar una una provisualización del método que se va a crear que es como ejemplo que implementamos una prueba ahora así que vamos a implementar una prueba de cautivas creando una nueva clase que se va a llamar roba peluad procesor test ubicado en los test de Java en procesor es ahora así que la cobertura sería el procesamiento dual completo que incluya la fase 1 hacia la fase 2 el manejo de errores si fase 1 falla fase 2 no se ejecuta como criterio 3 la validación de mapeo entre modelos y el código clave ahora sí como podemos ver el método de proceso al item ejecuta la primera fase que es sortido mercancía valida resultado y si termina ok ejecuta la fase 2 que salida mercancía el código está diseñado para la ejecución secuencial con manejo robusto ahora sí de los errores el log de tallado que ya tenemos manejándonos de más servicios que es a través de estates y de la nueva tabla de transession logs y esto verifica y se mantiene ahora sí que la siguiente vamos con los beneficios y alcance y esto se divide en beneficios técnicos procesamiento automático completo de las órdenes de unisorter compatibilidad total con el arquitectura que se llama abstract payload procesor y transabilidad completa con los logs de por fase por orden id por el pn más o al pn manejo de errores independientes por fase ahora sí que beneficios de negocio eliminación de dependencia manual reducción de 80% de tiempos de respuesta de procesamiento automático es 99% confiable cero inconsistencies de datos ya con la ayuda de los mapeos al alcance del módulo sería solamente el bswmswms full chip y unisorter específicamente dentro de los componentes son ropa payload procesor el objetivo es implementar el que tiene de aceptación dos con ejecución dual secuencial fase 1 que salida a surtido fase 2 que salida a mercancía sólo si fase 1 es igual o ok entradas de pubsup que el suscriptor interno se llama full ships or crater con los prefijos internos que se llama andop se llama floutorround y el congema el destination facility id en trasebilidad de con los logs en la fase en la fase que se mas el tráquete de traslays que son las dos tablas que tenemos para hacer la trasebilidad en cuestión de registros y hay errores que se llama transición procesor lock y transacción que se estates ahora así que no va a haber cambios en contratos no va a haber cambios en base de datos ni infraestructura solamente se van a tocar el único componente que se llama full ship y unisorter para si continuamos con las consideraciones y fechas como consideraciones técnicas como vale recalcar que no se modificará los contratos existentes que se salidas salidas surtidos y salida mercancías que están dentro del salida a service que la librería principal no se tocará la arquitectura de a strapeyloat procesor porque estoy ya estimplementado en los demás servicios aparte de este utilizan misma plantilla para todos los demás y solamente se tocará lo que es el ropa payload a procesor la conversión implícita de los de osa hacia los modelos por compatibilidad de los JSON tampoco será sólo se modificará el full ship y unisorter con la inyección solamente de los módulos que van a ser ropa payload y se va a ser la inyección de salidas mercancías a service y los nuevos métodos a crear va a ser proces dual item y mar cancia model y esto es para la conversión y la compatibilidad total con otros tipos de surtidos puede ser entre parche a siel final chip pre ship en esto en cuestión por si se quiere ampliar o se quiere crear algún cambio es muy fácil la implementación solamente se identificar la nueva idea de negocio pero está todo listo para hacer cualquier cambio en líneas de tiempo pues podemos identificar que la codificación completa se iniciará el 24 de noviembre las pruebas de proceso que ya se están bueno la codificación ya estén iniciando nada más en las pruebas de proceso que es el 10 de diciembre una liberación programada sería el 7 de enero conforme al calendario de oficial de implementaciones y ahora continuamos en supuestos y restricciones como supuestos tenemos que los servicios de salidas surtidos service y salida mercancía a service mantiene en los contratos fijos compatibilidad completa entre los de teos y los módulos funciona por compatibilidad y no se requeren cambios ni en base y o ni en salida service la arquitectura de astrat payload procesor permanece sin cambios mayores ahora si como restricciones sólo se modifica el full ship y un shortter no se puede modificar con tratos de servicios existentes se debe mantener la compatibilidad con otros tipos de surtidos el procesamiento dual debe de ser transparente para el sistema de consumidores porque es importante esta restricciones nos obligaron a buscar una solución elegante resultado la implementación es de bajo riesgo que reutiliza todo el existente se aura impacto en otros procesos de surtido y como breve tenemos estos hallazgos en el análisis durante el análisis identificamos hallazgos importantes por por rol el desarrollador arquitectura existente probada y funcional recomendación mantener la compatibilidad con apsat payload procesor en cuestión de los tercers el gap sería el que te lo he aceptado no está implementado recomendación implementar pruebas exapsivas para ese narío dual para el arquitecto conversión implícita del deteo a modulos funciona como recomendación no modificar los deteos ni modulos existentes como operaciones dependencia manual para generar cuelos de botella como recomendación automatizar el proceso completo para eliminar la intervención manual y como conclusión el problema no era técnico la arquitectura ya estabalista y el gap era funcional faltaba implementar solamente el que te la aceptación 2 y como solución agregar el puente para conectar a vos servicios por así como resultado la automatización es ringenería y como cierre es le puedo decir ahora sí que ni resumen de contexto general como contexto breve pues ahora sí que la arquitectura está estable sólo hay ahora sí que se puede decir que hoy solamente corremos una la fase de subtido la confirmación final se atiende fuera del flujo podemos incrementar el procesamiento dual integrar el procesamiento dual se coincial dentro del ropa pelo a procesor que es en el módulo de full ship y un esórter primero se ejecutan lo que es el salida a su artido service y al terminar ok se ejecuta salida a mercancía ahora sí como beneficios así se puede decir rapidez menos errores mejor trazabilidad reducción de tiempos y ahora sí que sería en sí todo por lo que les puedo presentar no sé si tienen alguna duda aclaración no sé si fue muy rápido si mediante perdón Rafael, nada más para complementar en esta segunda propuesta de mejor a ti básicamente estaríamos pues igualando lo que el compañero francés convencionó en su propuesta si bien envuelvecamos a una fecha de liberación para enero estaríamos de igual manera buscando que esta sucediera pues antes pero vayas a respetando dicho calendario nos salientas tenero ya lo demás pues ya sería cuestión de que se comete internamente si nos dan los verdes pues lo haríamos pues a la brevedad en la media lo posible lo estaríamos buscando para que sucediera en diciembre ahora sí adelante quien guste y tenga preguntas que sea la palabra no más una duda al inicio del del requerimiento de este por decirlo sí vi que decía que sólo contemplar el tema de un esórter por full chip confirmes correcto exactamente está en lo correcto solamente considera el full chip y las parcialidades exactamente el parcial se según yo ya funciona esa parte pero tengo que este requerimiento es también para contemplar si hay una full chip me procesarla no remover la parcial pues es así como tú lo dices dufina este de full chip nos estaba ocupando de hecho si se tenía pensado pero no estaba correcto y lo que se hizo fue reutilizar el código de lo que era la parcial y el final y lo que si se fue ahora siempre realizar el código completo del del full chip y hacerlo los criterios de aceptación conforme lo que nos habían pasado sí básicamente o sea para lo que sea la parcial también hacerlo en la full exactamente por eso es el procesamiento dual y que más era la duda porque como vi sólo full chip me dije pues con que no se quita el procesamiento de la parcial todo bien si quieres regresar al diagrama y ahí creo nada más el cambio va a estar y no sí esto ya con eso era ahí si quieres puedes ver en la pantalla que dice fase 1 y fase 2 antes solamente se ejecutaba lo que era la fase 1 pero lo que faltaba era la fase 2 entonces lo que sí hizo fue ahora lo que se tiene que hacer es implementar lo que tiene los criterios de aceptación ocupar el código existente y hacer el nuevo servicio funcional y este diagrama te muestra brevemente el resumen del del criterio de aceptación 2 y el criterio de aceptación 1 y también la trazabilidad del criterio de aceptación 3 ahora sí que ese es el plan integral de todo lo requerido pero ahora sí que darle este hoy de esta aplicación se puede decir para que haga todo ese procesamiento ok salva les gusta gracias alguna otra duda alguien que quiera levantar la malita pregunta pues si no hay más dudas creo que es todo equipo por ahí mandamos la minuta el día de hoy junto con la presentación en formato pdf y se las compartimos yo creo que por la terrecita porque ya se lo tiene la verdad la comida porque aprovechita todos un excelente miércoles y que tengan bonitas semanas hasta luego",
+  "language": "es",
+  "segments": [
+    {
+      "id": 0,
+      "start": 0.0,
+      "end": 12.96,
+      "text": "y estamos presentando el día de gol como parte del equipo de AMS soft tech la propuesta de"
+    },
+    {
+      "id": 1,
+      "start": 12.96,
+      "end": 24.72,
+      "text": "solución del polo mejora 1041 e 1428 donde estaríamos solucionando una genera"
+    },
+    {
+      "id": 2,
+      "start": 24.72,
+      "end": 31.0,
+      "text": "de tiendas a partir de un par de chip y no de un final chip aquí nos estaría apoyando para"
+    },
+    {
+      "id": 3,
+      "start": 31.0,
+      "end": 39.8,
+      "text": "esta presentación mi compañero Francisco adelante franc por favor gracias"
+    },
+    {
+      "id": 4,
+      "start": 42.8,
+      "end": 49.56,
+      "text": "bueno gratis equipo por tiempo vamos a presentar tu puesta solucion para el polo mejora de generación de"
+    },
+    {
+      "id": 5,
+      "start": 49.56,
+      "end": 56.480000000000004,
+      "text": "tiendas a partir del par de chip está a ser un poco de la tienda que vamos a llevar"
+    },
+    {
+      "id": 6,
+      "start": 56.480000000000004,
+      "end": 63.7,
+      "text": "hoy como antecedente se tiene que dentro del proyecto de texcoco al realizar la"
+    },
+    {
+      "id": 7,
+      "start": 63.7,
+      "end": 68.68,
+      "text": "reintinería los procesos que abarcan los diferentes tipos de esportido dentro de la"
+    },
+    {
+      "id": 8,
+      "start": 68.68,
+      "end": 74.72,
+      "text": "fase 1 han estado presentando coincidencias en los últimos meses donde debido a los problemas"
+    },
+    {
+      "id": 9,
+      "start": 74.72,
+      "end": 82.72,
+      "text": "de integración que se tienen actualmente del sistema de negado y contra el tema de"
+    },
+    {
+      "id": 10,
+      "start": 82.72,
+      "end": 87.96,
+      "text": "Manhattan ha estado revelando hay algunas pequeñas coincidencias con respecto a los datos que"
+    },
+    {
+      "id": 11,
+      "start": 87.96,
+      "end": 95.12,
+      "text": "salen contra los que llegan por lo tanto como puntos relevantes tenemos actualmente que en la"
+    },
+    {
+      "id": 12,
+      "start": 95.12,
+      "end": 102.4,
+      "text": "salida depende principalmente de que la integración del sistema de Manhattan se complete en su"
+    },
+    {
+      "id": 13,
+      "start": 102.4,
+      "end": 110.04,
+      "text": "totalidad con la operación de la bodega y su respectivo sistema estos datos por retrasos"
+    },
+    {
+      "id": 14,
+      "start": 110.04,
+      "end": 116.16000000000001,
+      "text": "en la espera de la transferencia respecto a la integración en sistema de negado ha estado"
+    },
+    {
+      "id": 15,
+      "start": 116.16000000000001,
+      "end": 121.52000000000001,
+      "text": "generando que la titácoras o la información para terminar de procesar una caja"
+    },
+    {
+      "id": 16,
+      "start": 123.80000000000001,
+      "end": 129.92000000000002,
+      "text": "depende totalmente de la producción del procesamiento de todas las cajas para poder dar salida"
+    },
+    {
+      "id": 17,
+      "start": 129.92,
+      "end": 139.07999999999998,
+      "text": "en la mercancía y esto pues conlleva a muchos otros problemas consecuencias como condición"
+    },
+    {
+      "id": 18,
+      "start": 139.07999999999998,
+      "end": 146.6,
+      "text": "actual tenemos que actualmente el proceso de salida de texcoco donde se conviene de"
+    },
+    {
+      "id": 19,
+      "start": 146.6,
+      "end": 153.48,
+      "text": "el tema de Manhattan para integrarse en los sistemas de negado corresponde principalmente a que"
+    },
+    {
+      "id": 20,
+      "start": 154.0,
+      "end": 160.16,
+      "text": "esta integración su función principal es generar la titácoras y todos los documentos que sean"
+    },
+    {
+      "id": 21,
+      "start": 160.16,
+      "end": 165.95999999999998,
+      "text": "necesitarios respecto al inventario para poder salir de dar salida dicha me cantiara como ya les"
+    },
+    {
+      "id": 22,
+      "start": 165.95999999999998,
+      "end": 172.56,
+      "text": "ha estado mencionando anteriormente el hecho de depender totalmente de la integración de los datos"
+    },
+    {
+      "id": 23,
+      "start": 172.56,
+      "end": 179.39999999999998,
+      "text": "el sistema de negado ha permitido que se engenere una ventitud en los procesos de la salida de la"
+    },
+    {
+      "id": 24,
+      "start": 179.4,
+      "end": 186.20000000000002,
+      "text": "mercancía y pues que se tengan unas altas por nada de espera por debido a los datos que están por"
+    },
+    {
+      "id": 25,
+      "start": 186.20000000000002,
+      "end": 192.32,
+      "text": "integrarse y poder dar salida en la escáfora dentro de los procesos involucrados para la salida de"
+    },
+    {
+      "id": 26,
+      "start": 192.32,
+      "end": 199.08,
+      "text": "mercancía tenemos los úpidos que las entregas al cliente el unisorte y los pasados como dependencias"
+    },
+    {
+      "id": 27,
+      "start": 199.08,
+      "end": 205.20000000000002,
+      "text": "pues tenemos el sistema de Manhattan para la cuestión de armas enéxil temas de negado directamente para"
+    },
+    {
+      "id": 28,
+      "start": 205.2,
+      "end": 211.95999999999998,
+      "text": "la generación de la documentación de la titácoras como impacto al tener todo este tipo de"
+    },
+    {
+      "id": 29,
+      "start": 211.95999999999998,
+      "end": 216.6,
+      "text": "dependencia tenemos que excitar un retraso en la espera de la integración entre los datos"
+    },
+    {
+      "id": 30,
+      "start": 216.6,
+      "end": 222.79999999999998,
+      "text": "estas incidencias frecuentes en los últimos meses se angenerando por fallas de la sincronización"
+    },
+    {
+      "id": 31,
+      "start": 222.79999999999998,
+      "end": 231.2,
+      "text": "o datos que quedan volados en espera para poder ser integrados en la parte de datos delegados y pues"
+    },
+    {
+      "id": 32,
+      "start": 231.2,
+      "end": 235.88,
+      "text": "esto está fallado de integración de los datos genera ciertos bloqueos en los procesos de la"
+    },
+    {
+      "id": 33,
+      "start": 235.88,
+      "end": 244.16,
+      "text": "oficina control para que se pueda integrar completamente muchos datos estos datos que al permanecer en"
+    },
+    {
+      "id": 34,
+      "start": 244.16,
+      "end": 251.44,
+      "text": "espera generan tiempos prolongados de espera principalmente en operación de la oficina y pues"
+    },
+    {
+      "id": 35,
+      "start": 251.44,
+      "end": 258.24,
+      "text": "esto puede conllevar a los 10 dos de las entregas y un aumento de la carga operativa por lo tanto"
+    },
+    {
+      "id": 36,
+      "start": 258.96000000000004,
+      "end": 263.88,
+      "text": "esta integración de los datos al vez afectada pues no se puede generar dicha vita cora para"
+    },
+    {
+      "id": 37,
+      "start": 263.88,
+      "end": 273.40000000000003,
+      "text": "dar salida a la mercancía parte de la de la análisis que se llevo a cabo dentro de la mejora"
+    },
+    {
+      "id": 38,
+      "start": 273.40000000000003,
+      "end": 279.32,
+      "text": "es que bueno se encontró que dentro de la parta de la documentación cuando se contaba con"
+    },
+    {
+      "id": 39,
+      "start": 279.32,
+      "end": 285.72,
+      "text": "documentos completos del proceso que pudieran generar un mapego adecuado del flujo y así poder"
+    },
+    {
+      "id": 40,
+      "start": 285.72,
+      "end": 293.24,
+      "text": "mejorar dicha dicha actividad en el proceso es que actualmente el flujo depende totalmente de"
+    },
+    {
+      "id": 41,
+      "start": 293.24,
+      "end": 300.6,
+      "text": "que los datos sean integrados en el sistema delegado para dar salida a las cajas completas el método"
+    },
+    {
+      "id": 42,
+      "start": 300.6,
+      "end": 306.68,
+      "text": "actualmente depende de que el proceso de la nube se integre completamente el sistema delegado"
+    },
+    {
+      "id": 43,
+      "start": 306.68,
+      "end": 312.6,
+      "text": "para dar salida a las mercancías y esta espera pues está generando tiempos de esperándose en"
+    },
+    {
+      "id": 44,
+      "start": 312.6,
+      "end": 318.64000000000004,
+      "text": "el proceso por lo tanto del lado del aspecto del personal se tiene que pues estar generando por"
+    },
+    {
+      "id": 45,
+      "start": 318.64000000000004,
+      "end": 325.08000000000004,
+      "text": "el sistema antes de trabajo y pues ha derivado en algunos casos en que se produzca cierto nivel de"
+    },
+    {
+      "id": 46,
+      "start": 325.08000000000004,
+      "end": 331.44,
+      "text": "estrés derivado de que se requiere que todos los pedidos sean procesados para dar salida a la mercancía"
+    },
+    {
+      "id": 47,
+      "start": 333.96000000000004,
+      "end": 341.0,
+      "text": "aquí vemos un poquito del flujo actual que he llevado a cabo con respecto al proceso donde"
+    },
+    {
+      "id": 48,
+      "start": 341.0,
+      "end": 346.2,
+      "text": "bueno otra vez del badge job que llega desde el sistema de Manhattan y al momento de publicar un"
+    },
+    {
+      "id": 49,
+      "start": 346.2,
+      "end": 354.44,
+      "text": "mensaje de tipo parcial está recibida por los componentes de la fase 1 donde de entrada pues"
+    },
+    {
+      "id": 50,
+      "start": 354.44,
+      "end": 361.24,
+      "text": "va a guardar el estado actual del flujo en las bases de datos correspondientes del negado en"
+    },
+    {
+      "id": 51,
+      "start": 361.24,
+      "end": 368.88,
+      "text": "este caso en la parte de la nube correspondiente y posteriormente a que es procesado por parcialidad"
+    },
+    {
+      "id": 52,
+      "start": 368.88,
+      "end": 375.96,
+      "text": "al recibir los mensajes del del sheet confirm pues ir timbrando poco a poco los pedidos para una"
+    },
+    {
+      "id": 53,
+      "start": 375.96,
+      "end": 382.28,
+      "text": "vez timbrados pues integren los datos del negado aquí en la línea puntiada verde podemos ver que"
+    },
+    {
+      "id": 54,
+      "start": 382.28,
+      "end": 388.84,
+      "text": "se piensa aplicar la mejora en todos los componentes que es más referentes a la fase 1 de las"
+    },
+    {
+      "id": 55,
+      "start": 388.84,
+      "end": 395.84,
+      "text": "parcialidades que incluyen el sultido la entrega clientes el unikzorter y los traspasos donde pues"
+    },
+    {
+      "id": 56,
+      "start": 395.84,
+      "end": 403.2,
+      "text": "la mejora que se piensa aplicar es que en vez de ser los pedidos procesados por toda la caja o"
+    },
+    {
+      "id": 57,
+      "start": 403.2,
+      "end": 410.23999999999995,
+      "text": "espera que todas las cajas terminan de procesarte se genera una parcialidad por cada pedido y una vez"
+    },
+    {
+      "id": 58,
+      "start": 410.23999999999995,
+      "end": 416.32,
+      "text": "que llegue de último pedido de dicho de dicha caja se procese como completado para poder dar"
+    },
+    {
+      "id": 59,
+      "start": 416.32,
+      "end": 425.36,
+      "text": "esa alidad y chaman cancia dentro del arquitectura actual pues como lo hemos estado mencionando se"
+    },
+    {
+      "id": 60,
+      "start": 425.36,
+      "end": 430.8,
+      "text": "tiene una dependencia total de integración entre el sistema de manja tan el negado donde la"
+    },
+    {
+      "id": 61,
+      "start": 430.8,
+      "end": 435.71999999999997,
+      "text": "comunicación principal mente se realiza a través del un mensaje de chip confirm lo que"
+    },
+    {
+      "id": 62,
+      "start": 435.71999999999997,
+      "end": 441.56,
+      "text": "integra la parcialidad entre las bases y todo todo lo que conlleva en la clube como limitación"
+    },
+    {
+      "id": 63,
+      "start": 441.56,
+      "end": 447.04,
+      "text": "actual es que puede existir un bloqueo de tablas y el necolamiento de las transacciones se tiene"
+    },
+    {
+      "id": 64,
+      "start": 447.04,
+      "end": 451.86,
+      "text": "una basa de movilidad sobre el estado actual de la integración y hay una dependencia total de"
+    },
+    {
+      "id": 65,
+      "start": 451.86,
+      "end": 459.08,
+      "text": "mi prestultura del proceso como la propuesta técnica es que bueno se va a migrar la capa de integración"
+    },
+    {
+      "id": 66,
+      "start": 459.08,
+      "end": 465.56,
+      "text": "para hacer tomar directamente desde los datos que provienen de la nube y este consumo directo de"
+    },
+    {
+      "id": 67,
+      "start": 465.56,
+      "end": 471.32,
+      "text": "los datos de la nube pretende manejar los datos de una manera más eficiente para eliminar"
+    },
+    {
+      "id": 68,
+      "start": 471.32,
+      "end": 477.68,
+      "text": "dichas esperas y a su vez pues te vaya integrando con el cpede y para que vaya timprando las órdenes"
+    },
+    {
+      "id": 69,
+      "start": 477.68,
+      "end": 484.92,
+      "text": "con fondo te van llegando los dachos el objetivo es que con esto se lo ve una mejora significativa"
+    },
+    {
+      "id": 70,
+      "start": 484.92,
+      "end": 490.0,
+      "text": "en los tiempos de ejecución principalmente en las salidas de la mercancía relacionada a los"
+    },
+    {
+      "id": 71,
+      "start": 490.52,
+      "end": 498.08,
+      "text": "componentes de la parcialidad para enfocar en la eliminación de la parte de la integración de"
+    },
+    {
+      "id": 72,
+      "start": 498.08,
+      "end": 504.76,
+      "text": "los datos delegados para evitar esperar interminable con respecto a que se terminan de integrar"
+    },
+    {
+      "id": 73,
+      "start": 504.76,
+      "end": 513.56,
+      "text": "dichos datos para la salida a la mercancía con el punto de tomarlo directamente de las nube y"
+    },
+    {
+      "id": 74,
+      "start": 513.56,
+      "end": 521.4,
+      "text": "con ello a utilizar este proceso por lo tanto la propuesta de solución busca busca solucionar los"
+    },
+    {
+      "id": 75,
+      "start": 521.4,
+      "end": 527.8399999999999,
+      "text": "siguientes criterios de centración que en el primero sea que va a generar un pedido a cada"
+    },
+    {
+      "id": 76,
+      "start": 527.8399999999999,
+      "end": 537.68,
+      "text": "parcialidad cuando se reciba el saje del parcial chief confirm en donde este este plujo debe mantener"
+    },
+    {
+      "id": 77,
+      "start": 537.68,
+      "end": 544.92,
+      "text": "el tracking en las bases datos de la nube para saber qué tipo de movimientos está realizando y"
+    },
+    {
+      "id": 78,
+      "start": 544.92,
+      "end": 551.3599999999999,
+      "text": "este cambio va a ser aplicado a los grupos de la salida como ya lo hemos estado mencionando"
+    },
+    {
+      "id": 79,
+      "start": 551.3599999999999,
+      "end": 557.76,
+      "text": "serían los sentidos a la tienda la entrega a los clientes y los pasos y por último lo que les"
+    },
+    {
+      "id": 80,
+      "start": 557.76,
+      "end": 564.9599999999999,
+      "text": "mencionaba en el diagrama que en vez de procesar un pedido como completo o hasta que se como plete cada"
+    },
+    {
+      "id": 81,
+      "start": 564.96,
+      "end": 571.6,
+      "text": "pedido va a llegar como una parcialidad va a ser marcado más que una esquema de la letra P y el"
+    },
+    {
+      "id": 82,
+      "start": 571.6,
+      "end": 579.36,
+      "text": "último pedido que llegue va a ser marcado va a ser una letra C como completo esto le va a dar a"
+    },
+    {
+      "id": 83,
+      "start": 579.36,
+      "end": 584.88,
+      "text": "entender al sistema que una vez que esté completado ya no va a tener que esperar a la última casa"
+    },
+    {
+      "id": 84,
+      "start": 584.88,
+      "end": 591.44,
+      "text": "que sea procesada para poder dar salida a la mercancía con ello pues aquí alizar dicho proceso de"
+    },
+    {
+      "id": 85,
+      "start": 591.44,
+      "end": 599.0,
+      "text": "salida como beneficio pues tenemos la reducción de los tiempos la actividad del proceso se va a"
+    },
+    {
+      "id": 86,
+      "start": 599.0,
+      "end": 604.6400000000001,
+      "text": "disminuir el retraso de la entrega que entres y tiendas en su caso se va a optimizar las"
+    },
+    {
+      "id": 87,
+      "start": 604.6400000000001,
+      "end": 610.2800000000001,
+      "text": "actividades en la piscina control mejorando y reduciendo los jornales de extemo antes que"
+    },
+    {
+      "id": 88,
+      "start": 610.2800000000001,
+      "end": 617.32,
+      "text": "últimamente han estado presentando con ellos se mejora la productividad operativa y al migrar a la"
+    },
+    {
+      "id": 89,
+      "start": 617.32,
+      "end": 625.08,
+      "text": "nube pues tenemos otros beneficios adicionales como la escabarres calabilidad la seguridad de los"
+    },
+    {
+      "id": 90,
+      "start": 625.08,
+      "end": 630.44,
+      "text": "datos la mejor visibilidad de los procesos y la extensión de la vida útil del sistema"
+    },
+    {
+      "id": 91,
+      "start": 631.6400000000001,
+      "end": 638.84,
+      "text": "como alcance tenemos que estar capaz de integración de datos se va a aplicar en los componentes"
+    },
+    {
+      "id": 92,
+      "start": 638.84,
+      "end": 644.32,
+      "text": "relacionados en las parcialidades referentes a la etapa de la fase uno del proceso que son"
+    },
+    {
+      "id": 93,
+      "start": 644.32,
+      "end": 652.0,
+      "text": "los de su tido le entregan siguientes del yón el sortes de espasos como consideración es que"
+    },
+    {
+      "id": 94,
+      "start": 652.0,
+      "end": 657.08,
+      "text": "vamos a evitar el bloqueo de tables para no provocar en colamientos y que las bichas transacciones"
+    },
+    {
+      "id": 95,
+      "start": 657.08,
+      "end": 661.72,
+      "text": "manejen un tiempo de respuesta elevado para que no entorpesca otros procesos consecuencias"
+    },
+    {
+      "id": 96,
+      "start": 662.5200000000001,
+      "end": 670.44,
+      "text": "aquí manejamos una fecha aproximada donde la fecha de codificación es ya se comenzó la fecha"
+    },
+    {
+      "id": 97,
+      "start": 670.44,
+      "end": 675.8000000000001,
+      "text": "de codificación para ver el cambio tenemos planeado realizar las pruebas a partir del día de"
+    },
+    {
+      "id": 98,
+      "start": 675.8000000000001,
+      "end": 685.2,
+      "text": "diciembre y aquí como una nota pequeña se manejo la fecha de liberación respetando el calendario"
+    },
+    {
+      "id": 99,
+      "start": 685.2,
+      "end": 692.12,
+      "text": "de liberación seguras a través del cap donde marcamos el siete enero sin embargo se estaria"
+    },
+    {
+      "id": 100,
+      "start": 692.12,
+      "end": 698.5600000000001,
+      "text": "buscando el apoyo del equipo para poder liberar un poco antes debido a que pues sabemos que esto es"
+    },
+    {
+      "id": 101,
+      "start": 698.56,
+      "end": 708.16,
+      "text": "un tema prioritario como supuesto restricción tenemos que el inventario puede estar disponible para"
+    },
+    {
+      "id": 102,
+      "start": 708.16,
+      "end": 714.4399999999999,
+      "text": "las alidas la recepción en la ciencia debe consumir la información de este valor como actualmente"
+    },
+    {
+      "id": 103,
+      "start": 714.4399999999999,
+      "end": 721.1999999999999,
+      "text": "se procesa en la nube el timbrado debe estar disponible para la dicha documentación debemos evitar el bloqueo"
+    },
+    {
+      "id": 104,
+      "start": 721.2,
+      "end": 728.6,
+      "text": "de las tablas para notos entorpesar los procesos consecuentes o este lo que hablaba hace datos y estas"
+    },
+    {
+      "id": 105,
+      "start": 728.6,
+      "end": 734.5200000000001,
+      "text": "transacciones pueden mantener los tiempos de respuesta elevados para procesar rápidamente los datos"
+    },
+    {
+      "id": 106,
+      "start": 734.5200000000001,
+      "end": 742.12,
+      "text": "toda la transacción debe ser sincrona y pues no debe de de agradar actualmente el proceso que se"
+    },
+    {
+      "id": 107,
+      "start": 742.12,
+      "end": 745.36,
+      "text": "está llevando a cabo de acuerdo a los picos de demanda que se tiene"
+    },
+    {
+      "id": 108,
+      "start": 749.68,
+      "end": 753.64,
+      "text": "y pues esto es de esta parte de este focho"
+    },
+    {
+      "id": 109,
+      "start": 753.64,
+      "end": 754.64,
+      "text": "y así"
+    },
+    {
+      "id": 110,
+      "start": 766.4399999999999,
+      "end": 772.88,
+      "text": "ok eso que muestro es entiendo ya en el momento le vamos practicado con carlita me puedes mostrar"
+    },
+    {
+      "id": 111,
+      "start": 772.88,
+      "end": 777.96,
+      "text": "cuál es el dictamente técnico cuál va a ser tu impacto técnico que componentes vas a"
+    },
+    {
+      "id": 112,
+      "start": 777.96,
+      "end": 783.2,
+      "text": "modificar si te pasó los nombres en el chat"
+    },
+    {
+      "id": 113,
+      "start": 786.32,
+      "end": 793.2,
+      "text": "no lo incluyen en la presentación no es parte de los manejamos de manera general de dejarme"
+    },
+    {
+      "id": 114,
+      "start": 793.2,
+      "end": 801.12,
+      "text": "de cuento el diagrama principalmente ayer como tal"
+    },
+    {
+      "id": 115,
+      "start": 807.96,
+      "end": 830.52,
+      "text": "aquí principalmente se va a manejar en los componentes de la parcialidad llevan por nombre de ese guion"
+    },
+    {
+      "id": 116,
+      "start": 830.52,
+      "end": 842.52,
+      "text": "partial ship guion y un esortes guion client guion translate y me parece que lo"
+    },
+    {
+      "id": 117,
+      "start": 842.52,
+      "end": 843.16,
+      "text": "llamo"
+    },
+    {
+      "id": 118,
+      "start": 858.52,
+      "end": 868.52,
+      "text": "entonces bueno a lo que entiendo actualmente el servicio es el bswm se batchó contempla solamente"
+    },
+    {
+      "id": 119,
+      "start": 868.52,
+      "end": 875.64,
+      "text": "los mensajes del tópico que viene siendo full chipman y final chipman y ahora el cambio que"
+    },
+    {
+      "id": 120,
+      "start": 875.64,
+      "end": 879.6,
+      "text": "harían en el servicio sería que contempla también las parcialidades de cada uno"
+    },
+    {
+      "id": 121,
+      "start": 886.28,
+      "end": 887.96,
+      "text": "no sé si me escuché"
+    },
+    {
+      "id": 122,
+      "start": 887.96,
+      "end": 895.56,
+      "text": "correcto actualmente pues está manejando de esta manera los pedidos donde pues le llega"
+    },
+    {
+      "id": 123,
+      "start": 895.56,
+      "end": 901.2399999999999,
+      "text": "a este chipman de esta manera el chipman lo que se busca es que"
+    },
+    {
+      "id": 124,
+      "start": 901.2399999999999,
+      "end": 906.28,
+      "text": "es que es el que se hace por pedido entonces el que por lo de charcel"
+    },
+    {
+      "id": 125,
+      "start": 906.28,
+      "end": 910.28,
+      "text": "que pedido se entiende que la estructura actual ya está"
+    },
+    {
+      "id": 126,
+      "start": 910.28,
+      "end": 918.2399999999999,
+      "text": "construida para que una vez que se complete un pedido pueda dar la mercancía por lo tanto"
+    },
+    {
+      "id": 127,
+      "start": 925.56,
+      "end": 928.52,
+      "text": "que pueda desplogiar la previa"
+    },
+    {
+      "id": 128,
+      "start": 928.52,
+      "end": 930.04,
+      "text": "la previa es pletada"
+    },
+    {
+      "id": 129,
+      "start": 930.04,
+      "end": 931.88,
+      "text": "si es que se tiene que ver"
+    },
+    {
+      "id": 130,
+      "start": 931.88,
+      "end": 933.7199999999999,
+      "text": "pues salida del"
+    },
+    {
+      "id": 131,
+      "start": 933.7199999999999,
+      "end": 934.88,
+      "text": "estátua"
+    },
+    {
+      "id": 132,
+      "start": 934.88,
+      "end": 935.88,
+      "text": "estátua"
+    },
+    {
+      "id": 133,
+      "start": 935.88,
+      "end": 936.68,
+      "text": "correcto"
+    },
+    {
+      "id": 134,
+      "start": 936.68,
+      "end": 937.4799999999999,
+      "text": "ahora no es que no"
+    },
+    {
+      "id": 135,
+      "start": 937.4799999999999,
+      "end": 944.04,
+      "text": "depender de que por ejemplo llegan tres cazas que la cada uno termines el procesada"
+    },
+    {
+      "id": 136,
+      "start": 944.04,
+      "end": 949.88,
+      "text": "a dar salida a la cazas tres o a las tres cazas sino que conforme se termine en la caza uno"
+    },
+    {
+      "id": 137,
+      "start": 950.52,
+      "end": 957.24,
+      "text": "se complete y le pueda dar salida llegan a cazas dos se procesa de complete y puede dar salida"
+    },
+    {
+      "id": 138,
+      "start": 957.24,
+      "end": 965.24,
+      "text": "o sea que vayan cada y anorreciera que es que se proceden las tres cazas al mismo tiempo para"
+    },
+    {
+      "id": 139,
+      "start": 965.24,
+      "end": 968.92,
+      "text": "poder dar salida a la caza que era la depender de todo el que estuvo"
+    },
+    {
+      "id": 140,
+      "start": 968.92,
+      "end": 970.92,
+      "text": "y"
+    },
+    {
+      "id": 141,
+      "start": 976.12,
+      "end": 978.04,
+      "text": "bueno más sería que cuando"
+    },
+    {
+      "id": 142,
+      "start": 978.04,
+      "end": 985.3199999999999,
+      "text": "tu collieras van a las pruebas probar ese flujo de que de las parcialidades de que cuando mandes una caja"
+    },
+    {
+      "id": 143,
+      "start": 985.3199999999999,
+      "end": 989.7199999999999,
+      "text": "de que se haga el pedido para esa caja y deje pendiente los demás"
+    },
+    {
+      "id": 144,
+      "start": 989.7199999999999,
+      "end": 991.9599999999999,
+      "text": "correcto para que al final"
+    },
+    {
+      "id": 145,
+      "start": 991.9599999999999,
+      "end": 998.28,
+      "text": "me imagino que te he detectado cuando llega la última caja que sería una fina chico firma en el"
+    },
+    {
+      "id": 146,
+      "start": 998.28,
+      "end": 1003.56,
+      "text": "tema de las parcialidades para ir que al último pedido le pudiera que en base a ese mensaje le"
+    },
+    {
+      "id": 147,
+      "start": 1003.56,
+      "end": 1008.4399999999999,
+      "text": "pudiera poner la la sé cómo se mencionaba en la presentación que es un pedido completo"
+    },
+    {
+      "id": 148,
+      "start": 1017.24,
+      "end": 1022.8399999999999,
+      "text": "si si si menciones que los demás componentes que son los que interan en el negado y están preparados"
+    },
+    {
+      "id": 149,
+      "start": 1022.84,
+      "end": 1031.4,
+      "text": "para un consumo por por paquetes por decirlo así en las parcialidades pues estaría bien con más que"
+    },
+    {
+      "id": 150,
+      "start": 1053.3999999999999,
+      "end": 1077.76,
+      "text": "de la"
+    },
+    {
+      "id": 151,
+      "start": 1077.76,
+      "end": 1080.76,
+      "text": "הי, muy bien."
+    },
+    {
+      "id": 152,
+      "start": 1081.12,
+      "end": 1083.72,
+      "text": "Vale."
+    },
+    {
+      "id": 153,
+      "start": 1101.7,
+      "end": 1106.86,
+      "text": "Bueno antes nos nos va a responder"
+    },
+    {
+      "id": 154,
+      "start": 1106.86,
+      "end": 1111.8999999999999,
+      "text": "rafan nada más para comentarles, vamos a presentar una segunda propuesta de mejora."
+    },
+    {
+      "id": 155,
+      "start": 1113.4199999999998,
+      "end": 1120.1399999999999,
+      "text": "Rafa si me puedes apoyar a ir presentando a Yaví, nada más como una pequeña introducción,"
+    },
+    {
+      "id": 156,
+      "start": 1120.1399999999999,
+      "end": 1127.9799999999998,
+      "text": "pues del folio mejora es el 10-41-14903. Bueno, flujo de unit-sortes utilizando"
+    },
+    {
+      "id": 157,
+      "start": 1127.9799999999998,
+      "end": 1134.2199999999998,
+      "text": "únicamente full chip, aquí les vamos a estar comentando, básicamente, una optimización que se"
+    },
+    {
+      "id": 158,
+      "start": 1134.22,
+      "end": 1139.82,
+      "text": "estará realizando un proceso de unit-sortes y, bueno, adelante, Rafa con dos detalles, por favor."
+    },
+    {
+      "id": 159,
+      "start": 1142.8600000000001,
+      "end": 1147.74,
+      "text": "Bueno, así que, buenas tardes a todos, ya como me presento mi compañera,"
+    },
+    {
+      "id": 160,
+      "start": 1147.74,
+      "end": 1155.18,
+      "text": "mi nombre es Rafa el Malanco, por tenés cosa, IX, soy de MES, copial, LL3. Hoy presentamos la propuesta"
+    },
+    {
+      "id": 161,
+      "start": 1155.18,
+      "end": 1163.8600000000001,
+      "text": "de mejora del folio de mejora el 10-41-1493, que es automatizar el flujo de unit-sortes"
+    },
+    {
+      "id": 162,
+      "start": 1163.8600000000001,
+      "end": 1172.38,
+      "text": "utilizando únicamente full chip, esto para sediste escoco eliminando la intervención manual de"
+    },
+    {
+      "id": 163,
+      "start": 1172.38,
+      "end": 1178.94,
+      "text": "oficinas con drole. Ahora, así que les cuento cómo lo haremos."
+    },
+    {
+      "id": 164,
+      "start": 1179.9,
+      "end": 1188.8600000000001,
+      "text": "Esto es la descripción de la agenda que llevaremos en la presentación, que lo cual incluye 6 puntos."
+    },
+    {
+      "id": 165,
+      "start": 1190.94,
+      "end": 1199.5800000000002,
+      "text": "Vamos con la descripción. En cuestión de la descripción de mejora, esta mejora optimiza el"
+    },
+    {
+      "id": 166,
+      "start": 1199.5800000000002,
+      "end": 1208.06,
+      "text": "procesamiento de mensajes de unit-sortes en el sistema WMS de copial, mediante la implementación de"
+    },
+    {
+      "id": 167,
+      "start": 1208.06,
+      "end": 1217.82,
+      "text": "un flujo dual de automatizado. Actualmente, el código del módulo de Robapilot Processor está"
+    },
+    {
+      "id": 168,
+      "start": 1217.82,
+      "end": 1228.82,
+      "text": "diseñado para ejecutar una sola fase de procesamiento, lo que requiere complemento manual para completar"
+    },
+    {
+      "id": 169,
+      "start": 1228.82,
+      "end": 1238.8999999999999,
+      "text": "el ciclo de la integración de datos desde Manhattan del WM, hacia el sistema alegado. Ahora,"
+    },
+    {
+      "id": 170,
+      "start": 1238.8999999999999,
+      "end": 1244.22,
+      "text": "así en contexto de la mejora, los tres puntos claves o en primero la arquitectura base sólida,"
+    },
+    {
+      "id": 171,
+      "start": 1244.22,
+      "end": 1251.86,
+      "text": "el sistema ya cuenta con una cadena funcional que es del Bass Job hacia el Pub-Sub hacia full"
+    },
+    {
+      "id": 172,
+      "start": 1251.86,
+      "end": 1260.1799999999998,
+      "text": "sheet y unisorter, y este hacía la librería de salida service y el Robapilot Processor procesa"
+    },
+    {
+      "id": 173,
+      "start": 1260.1799999999998,
+      "end": 1270.9399999999998,
+      "text": "correctamente la primera fase, pero el surgido mercancía, el primer fase que se surgió"
+    },
+    {
+      "id": 174,
+      "start": 1270.9399999999998,
+      "end": 1277.82,
+      "text": "mercancía y como segundo, que es el área de oportunidad identificada, implementa el procesamiento"
+    },
+    {
+      "id": 175,
+      "start": 1277.82,
+      "end": 1287.06,
+      "text": "implementar el procesamiento dual, completo requiere requerido por el criatura de aceptación 2,"
+    },
+    {
+      "id": 176,
+      "start": 1288.6599999999999,
+      "end": 1294.34,
+      "text": "donde cada mensaje se procesa secuencialmente, primero se ejecutará salida"
+    },
+    {
+      "id": 177,
+      "start": 1294.34,
+      "end": 1301.98,
+      "text": "subdido service con el método salida subdido, y luego salida mercancía service, ejecutará el"
+    },
+    {
+      "id": 178,
+      "start": 1301.98,
+      "end": 1309.14,
+      "text": "método de salida mercancía, eliminando los pasos manuales como tercero beneficios operativos,"
+    },
+    {
+      "id": 179,
+      "start": 1309.14,
+      "end": 1318.54,
+      "text": "la automatización completa del ciclo de órdenes de unisorter, eliminando la dependencia de"
+    },
+    {
+      "id": 180,
+      "start": 1318.54,
+      "end": 1325.78,
+      "text": "intervención manual por parte del área de fiscinas control y mejorando la eficiencia y reduciendo"
+    },
+    {
+      "id": 181,
+      "start": 1325.78,
+      "end": 1338.74,
+      "text": "tiempos de respuesta, donde estamos hoy, como contexto general, la situación actual"
+    },
+    {
+      "id": 182,
+      "start": 1338.74,
+      "end": 1345.94,
+      "text": "plantea las siguientes preguntas que el sistema tenemos actualmente, en WMS"
+    },
+    {
+      "id": 183,
+      "start": 1345.94,
+      "end": 1353.02,
+      "text": "Copiel recibe las órdenes de subdido de Manhattan, el sistema de almacén de service,"
+    },
+    {
+      "id": 184,
+      "start": 1353.02,
+      "end": 1363.78,
+      "text": "y unisorter es el sistema de automatizado que clasifica ropa para envío directo a tiendas,"
+    },
+    {
+      "id": 185,
+      "start": 1363.78,
+      "end": 1374.18,
+      "text": "como en infraestructura base, funcionando correctamente, y como identificamos el orden de unisorter,"
+    },
+    {
+      "id": 186,
+      "start": 1374.9,
+      "end": 1382.5800000000002,
+      "text": "las órdenes de unisorter tienen los preficos ID igual a DOP, identifica las órdenes de"
+    },
+    {
+      "id": 187,
+      "start": 1382.5800000000002,
+      "end": 1396.1000000000001,
+      "text": "subdido para tiendas, ordentime igual a Flow to Round, y mercancía pasa directo sin almacenarse,"
+    },
+    {
+      "id": 188,
+      "start": 1396.6599999999999,
+      "end": 1405.86,
+      "text": "y Destination Facility ID, inicia con la letra T, destino es una tiendas específica,"
+    },
+    {
+      "id": 189,
+      "start": 1405.86,
+      "end": 1413.4599999999998,
+      "text": "que podemos mejorar en el código, el ropa peluad procesor actualmente ejecuta solamente la"
+    },
+    {
+      "id": 190,
+      "start": 1413.4599999999998,
+      "end": 1420.98,
+      "text": "primera fase que podemos identificar lo que es el método de salida surtido, que existe y"
+    },
+    {
+      "id": 191,
+      "start": 1420.98,
+      "end": 1428.02,
+      "text": "existe actualmente lo que se llama salida mercancía service, está disponible, pero no está integrado"
+    },
+    {
+      "id": 192,
+      "start": 1428.02,
+      "end": 1434.82,
+      "text": "para órdenes de unisorter, en cuestión de oportunidad mejora se puede implementar el puente de"
+    },
+    {
+      "id": 193,
+      "start": 1434.82,
+      "end": 1440.82,
+      "text": "la conversión entre los dos modelos que uno de ellos se llama Jason Salida Surtido,"
+    },
+    {
+      "id": 194,
+      "start": 1440.82,
+      "end": 1450.6599999999999,
+      "text": "Asia, Jason Salida, Mercancía Model, que ganamos con esta mejora, se registra que sale del"
+    },
+    {
+      "id": 195,
+      "start": 1450.6599999999999,
+      "end": 1458.82,
+      "text": "almacen, Surtido, esto ya funciona, lo nuevo se registrará automáticamente la confirmación final"
+    },
+    {
+      "id": 196,
+      "start": 1458.82,
+      "end": 1466.62,
+      "text": "del envío, que es Mercancía, resultado, la automatización completa del proceso sin intervención"
+    },
+    {
+      "id": 197,
+      "start": 1466.62,
+      "end": 1480.3,
+      "text": "manual, ahora veamos el valor, el valor se puede considerar como alto impacto, la automatización"
+    },
+    {
+      "id": 198,
+      "start": 1480.3,
+      "end": 1490.62,
+      "text": "completa de confirmaciones atiendas, una reducción de tiempos de entre 15 y 30 minutos,"
+    },
+    {
+      "id": 199,
+      "start": 1490.62,
+      "end": 1497.5,
+      "text": "a solamente 2 a 3 minutos por envío, que pueden ser dependiendo de la carga de trabajo,"
+    },
+    {
+      "id": 200,
+      "start": 1497.5,
+      "end": 1503.8999999999999,
+      "text": "pueden ser cientos diarios o dependiendo de la tipo de tráfico, eliminación de errores manual,"
+    },
+    {
+      "id": 201,
+      "start": 1504.9399999999998,
+      "end": 1513.7399999999998,
+      "text": "la escalabilidad lista para TESCOC, como centro principal de zona centro, se puede considerar también"
+    },
+    {
+      "id": 202,
+      "start": 1513.74,
+      "end": 1520.94,
+      "text": "como baja complejidad, los servicios ya existen y están probados sin cambio en base de datos,"
+    },
+    {
+      "id": 203,
+      "start": 1520.94,
+      "end": 1528.74,
+      "text": "ni infraestructura, ni arquitectura, y la arquitectura está preparada para la ejecución dual y la"
+    },
+    {
+      "id": 204,
+      "start": 1528.74,
+      "end": 1539.7,
+      "text": "reutilización de código, así continuemos en análisis técnico de oportunidad de mejora,"
+    },
+    {
+      "id": 205,
+      "start": 1542.34,
+      "end": 1551.6200000000001,
+      "text": "usamos un análisis de causa raíz ubicando la mejora en alto impacto baja dificultad por la"
+    },
+    {
+      "id": 206,
+      "start": 1551.62,
+      "end": 1561.1399999999999,
+      "text": "metodología, como lo podemos ver, el diseño inicial fue base única, ahora entendemos, extendemos"
+    },
+    {
+      "id": 207,
+      "start": 1561.1399999999999,
+      "end": 1569.2199999999998,
+      "text": "a ejecución dual con documentación disponible, por tecnología fase 1 lista para la extensión,"
+    },
+    {
+      "id": 208,
+      "start": 1569.2199999999998,
+      "end": 1577.4599999999998,
+      "text": "en salida mercancías, ahora sí está disponible, por infraestructura de login está lista en cuestión"
+    },
+    {
+      "id": 209,
+      "start": 1577.46,
+      "end": 1584.1000000000001,
+      "text": "para trazabilidad, y por personas o oportunidad de integrar conocimientos entre los equipos,"
+    },
+    {
+      "id": 210,
+      "start": 1585.38,
+      "end": 1593.6200000000001,
+      "text": "requisitos completos identificados, y por el proceso fase 1 está operativa, fase 2 disponible para"
+    },
+    {
+      "id": 211,
+      "start": 1593.6200000000001,
+      "end": 1604.1000000000001,
+      "text": "implementar y automatización completa es factible o está disponible en cuestión, ahora vamos a la"
+    },
+    {
+      "id": 212,
+      "start": 1604.1,
+      "end": 1612.8999999999999,
+      "text": "siguiente que es el flujo funcional, en el diagrama muestra el flujo completo,"
+    },
+    {
+      "id": 213,
+      "start": 1614.5,
+      "end": 1622.6599999999999,
+      "text": "como se puede visualizar, tenemos lo que es el maghatan www, que genera las órdenes,"
+    },
+    {
+      "id": 214,
+      "start": 1622.6599999999999,
+      "end": 1630.82,
+      "text": "este a su vez lo manda a base job, que procesa y publica al Pubsob, este a su vez lo manda directamente"
+    },
+    {
+      "id": 215,
+      "start": 1630.82,
+      "end": 1636.58,
+      "text": "a full chip y unisorter, que consume el mensaje a través de los procesos internos, se llama"
+    },
+    {
+      "id": 216,
+      "start": 1636.58,
+      "end": 1643.3,
+      "text": "ropa peluad procesor, que esta a su vez de ser realiza, y este ejecuta los nuevos métodos que se van a"
+    },
+    {
+      "id": 217,
+      "start": 1643.3,
+      "end": 1650.1,
+      "text": "implementar, que es proces dual item, que ejecuta primero la fase que es la deshurtido con salida"
+    },
+    {
+      "id": 218,
+      "start": 1650.1,
+      "end": 1657.3799999999999,
+      "text": "a suurtido service, y al terminar da un ok, que convertimos los datos y lanzamos la fase 2 que es la"
+    },
+    {
+      "id": 219,
+      "start": 1657.38,
+      "end": 1665.7,
+      "text": "de mercancía, con salida mercancía a service, el resultado llega a sistema alegado, con esto"
+    },
+    {
+      "id": 220,
+      "start": 1665.7,
+      "end": 1675.3000000000002,
+      "text": "el ciclo queda completo y trazable sin intervención manual, qué componentes tocamos,"
+    },
+    {
+      "id": 221,
+      "start": 1677.5400000000002,
+      "end": 1686.0600000000002,
+      "text": "la propuesta optimiza lo que se llama ropa peluad procesor, implementando el procesamiento dual"
+    },
+    {
+      "id": 222,
+      "start": 1686.06,
+      "end": 1692.94,
+      "text": "el secuencial, manteniendo la compatibilidad con la arquitectura de abstract peluad procesor,"
+    },
+    {
+      "id": 223,
+      "start": 1694.7,
+      "end": 1701.74,
+      "text": "y los critores de aceptación que son consumir el full chip de unisorter con los prefijos"
+    },
+    {
+      "id": 224,
+      "start": 1701.74,
+      "end": 1710.1399999999999,
+      "text": "ya mencionados antes que es docter row, destination facilite y con la inicialización de T,"
+    },
+    {
+      "id": 225,
+      "start": 1710.7,
+      "end": 1717.5,
+      "text": "el criterio de aceptación 2, que es procesar dos veces primero el surtido, luego mercancía y"
+    },
+    {
+      "id": 226,
+      "start": 1717.5,
+      "end": 1724.46,
+      "text": "criterio de aceptación 3, grabar en el tracknade de la 9 de Coppel para la trasabilidad completa,"
+    },
+    {
+      "id": 227,
+      "start": 1725.98,
+      "end": 1733.5800000000002,
+      "text": "únicos módulos a modificar van a ser el full chip y unisorter en ropa peluad procesor,"
+    },
+    {
+      "id": 228,
+      "start": 1734.3,
+      "end": 1740.22,
+      "text": "que los cuales vamos a hacer la inyección de salir a mercancía para implementar los dos métodos"
+    },
+    {
+      "id": 229,
+      "start": 1740.22,
+      "end": 1750.62,
+      "text": "que se llama proces dual item y el mapo que se llama map2 mercancía model, continuamos,"
+    },
+    {
+      "id": 230,
+      "start": 1750.62,
+      "end": 1760.78,
+      "text": "que es la arquitectura de cambios, en si los cambios van a ser en ropa peluad procesor"
+    },
+    {
+      "id": 231,
+      "start": 1761.42,
+      "end": 1770.54,
+      "text": "ubicado en el servicio en las carpetas internas que se llama Coppel procesors y las mejoras"
+    },
+    {
+      "id": 232,
+      "start": 1770.54,
+      "end": 1776.1399999999999,
+      "text": "serían con no habíamos mencionado antes que es primero la inyección de salidas, salida,"
+    },
+    {
+      "id": 233,
+      "start": 1776.1399999999999,
+      "end": 1783.5,
+      "text": "mercancía a service en el constructor, reutilizando el servicio existente, el nuevo método de"
+    },
+    {
+      "id": 234,
+      "start": 1784.3,
+      "end": 1790.7,
+      "text": "proces dual item que implementa el criterio de aceptación 2 con procesamiento secuencial,"
+    },
+    {
+      "id": 235,
+      "start": 1790.7,
+      "end": 1799.18,
+      "text": "como punto 3 el nuevo método de map2 mercancía model con la conversión sin modificar los"
+    },
+    {
+      "id": 236,
+      "start": 1799.18,
+      "end": 1810.8600000000001,
+      "text": "de Teos Existentes, como punto 4 el lo que informativo con los orden ID y el OLEPN para mejorar"
+    },
+    {
+      "id": 237,
+      "start": 1810.8600000000001,
+      "end": 1817.8200000000002,
+      "text": "la trazabilidad, como punto 2 tenemos lo que es el map de los modelos que es la conversión de los"
+    },
+    {
+      "id": 238,
+      "start": 1817.8200000000002,
+      "end": 1825.02,
+      "text": "datos entre iesos salidas, sortido model y iesos salida mercancía model, los campos que se van a"
+    },
+    {
+      "id": 239,
+      "start": 1825.02,
+      "end": 1834.62,
+      "text": "utilizar para este map o van a ser el master que toma el OLEPN del sortido, caja toma el nunco"
+    },
+    {
+      "id": 240,
+      "start": 1834.62,
+      "end": 1844.54,
+      "text": "digo del primer detalle en fecha de lo LPN y tipo guía convierte de un string a un short y"
+    },
+    {
+      "id": 241,
+      "start": 1844.54,
+      "end": 1855.34,
+      "text": "factura convierte de 5 1 a un string continuamos el siguiente es pruebas y un icódigo clave aquí"
+    },
+    {
+      "id": 242,
+      "start": 1855.34,
+      "end": 1861.1,
+      "text": "les puede mostrar una una provisualización del método que se va a crear que es como ejemplo"
+    },
+    {
+      "id": 243,
+      "start": 1862.7,
+      "end": 1867.6599999999999,
+      "text": "que implementamos una prueba ahora así que vamos a implementar una prueba de cautivas creando"
+    },
+    {
+      "id": 244,
+      "start": 1868.22,
+      "end": 1876.8600000000001,
+      "text": "una nueva clase que se va a llamar roba peluad procesor test ubicado en los test de Java en"
+    },
+    {
+      "id": 245,
+      "start": 1876.8600000000001,
+      "end": 1885.18,
+      "text": "procesor es ahora así que la cobertura sería el procesamiento dual completo que incluya la fase 1"
+    },
+    {
+      "id": 246,
+      "start": 1885.18,
+      "end": 1893.42,
+      "text": "hacia la fase 2 el manejo de errores si fase 1 falla fase 2 no se ejecuta como criterio 3 la"
+    },
+    {
+      "id": 247,
+      "start": 1893.42,
+      "end": 1902.22,
+      "text": "validación de mapeo entre modelos y el código clave ahora sí como podemos ver el método de"
+    },
+    {
+      "id": 248,
+      "start": 1902.22,
+      "end": 1913.26,
+      "text": "proceso al item ejecuta la primera fase que es sortido mercancía valida resultado y si termina"
+    },
+    {
+      "id": 249,
+      "start": 1913.26,
+      "end": 1920.46,
+      "text": "ok ejecuta la fase 2 que salida mercancía el código está diseñado para la ejecución"
+    },
+    {
+      "id": 250,
+      "start": 1920.46,
+      "end": 1926.78,
+      "text": "secuencial con manejo robusto ahora sí de los errores el log de tallado que ya tenemos"
+    },
+    {
+      "id": 251,
+      "start": 1926.78,
+      "end": 1932.46,
+      "text": "manejándonos de más servicios que es a través de estates y de la nueva tabla de transession logs"
+    },
+    {
+      "id": 252,
+      "start": 1933.9,
+      "end": 1936.54,
+      "text": "y esto verifica y se mantiene"
+    },
+    {
+      "id": 253,
+      "start": 1939.66,
+      "end": 1948.22,
+      "text": "ahora sí que la siguiente vamos con los beneficios y alcance y esto se divide en beneficios técnicos"
+    },
+    {
+      "id": 254,
+      "start": 1948.94,
+      "end": 1953.26,
+      "text": "procesamiento automático completo de las órdenes de unisorter"
+    },
+    {
+      "id": 255,
+      "start": 1955.1000000000001,
+      "end": 1960.78,
+      "text": "compatibilidad total con el arquitectura que se llama abstract"
+    },
+    {
+      "id": 256,
+      "start": 1962.06,
+      "end": 1971.1000000000001,
+      "text": "payload procesor y transabilidad completa con los logs de por fase por orden id por el"
+    },
+    {
+      "id": 257,
+      "start": 1971.1,
+      "end": 1980.62,
+      "text": "pn más o al pn manejo de errores independientes por fase ahora sí que beneficios de negocio"
+    },
+    {
+      "id": 258,
+      "start": 1980.62,
+      "end": 1988.62,
+      "text": "eliminación de dependencia manual reducción de 80% de tiempos de respuesta de procesamiento"
+    },
+    {
+      "id": 259,
+      "start": 1988.62,
+      "end": 1998.06,
+      "text": "automático es 99% confiable cero inconsistencies de datos ya con la ayuda de los mapeos al"
+    },
+    {
+      "id": 260,
+      "start": 1998.06,
+      "end": 2007.34,
+      "text": "alcance del módulo sería solamente el bswmswms full chip y unisorter"
+    },
+    {
+      "id": 261,
+      "start": 2008.3,
+      "end": 2015.82,
+      "text": "específicamente dentro de los componentes son ropa payload procesor el objetivo es implementar el"
+    },
+    {
+      "id": 262,
+      "start": 2015.82,
+      "end": 2021.7,
+      "text": "que tiene de aceptación dos con ejecución dual secuencial fase 1 que salida a"
+    },
+    {
+      "id": 263,
+      "start": 2021.7,
+      "end": 2032.42,
+      "text": "surtido fase 2 que salida a mercancía sólo si fase 1 es igual o ok entradas de pubsup que el"
+    },
+    {
+      "id": 264,
+      "start": 2032.42,
+      "end": 2039.22,
+      "text": "suscriptor interno se llama full ships or crater con los prefijos internos que se llama andop"
+    },
+    {
+      "id": 265,
+      "start": 2039.22,
+      "end": 2056.1,
+      "text": "se llama floutorround y el congema el destination facility id en trasebilidad de con los logs en la fase"
+    },
+    {
+      "id": 266,
+      "start": 2056.1,
+      "end": 2061.78,
+      "text": "en la fase que se mas el tráquete de traslays que son las dos tablas que tenemos para hacer la"
+    },
+    {
+      "id": 267,
+      "start": 2061.78,
+      "end": 2068.1,
+      "text": "trasebilidad en cuestión de registros y hay errores que se llama transición procesor lock y"
+    },
+    {
+      "id": 268,
+      "start": 2068.1,
+      "end": 2077.18,
+      "text": "transacción que se estates ahora así que no va a haber cambios en contratos no va a haber cambios en"
+    },
+    {
+      "id": 269,
+      "start": 2077.18,
+      "end": 2083.54,
+      "text": "base de datos ni infraestructura solamente se van a tocar el único componente que se llama full"
+    },
+    {
+      "id": 270,
+      "start": 2083.54,
+      "end": 2093.2999999999997,
+      "text": "ship y unisorter para si continuamos con las consideraciones y fechas como consideraciones técnicas"
+    },
+    {
+      "id": 271,
+      "start": 2093.3,
+      "end": 2100.42,
+      "text": "como vale recalcar que no se modificará los contratos existentes que se salidas salidas"
+    },
+    {
+      "id": 272,
+      "start": 2100.42,
+      "end": 2108.42,
+      "text": "surtidos y salida mercancías que están dentro del salida a service que la librería principal"
+    },
+    {
+      "id": 273,
+      "start": 2110.2200000000003,
+      "end": 2115.86,
+      "text": "no se tocará la arquitectura de a strapeyloat procesor porque estoy ya estimplementado en los"
+    },
+    {
+      "id": 274,
+      "start": 2115.86,
+      "end": 2121.78,
+      "text": "demás servicios aparte de este utilizan misma plantilla para todos los demás y solamente se tocará"
+    },
+    {
+      "id": 275,
+      "start": 2121.78,
+      "end": 2129.6600000000003,
+      "text": "lo que es el ropa payload a procesor la conversión implícita de los de osa hacia los modelos por"
+    },
+    {
+      "id": 276,
+      "start": 2129.6600000000003,
+      "end": 2135.86,
+      "text": "compatibilidad de los JSON tampoco será sólo se modificará el full ship y unisorter con la"
+    },
+    {
+      "id": 277,
+      "start": 2135.86,
+      "end": 2142.02,
+      "text": "inyección solamente de los módulos que van a ser ropa payload y se va a ser la inyección de salidas"
+    },
+    {
+      "id": 278,
+      "start": 2142.02,
+      "end": 2148.26,
+      "text": "mercancías a service y los nuevos métodos a crear va a ser proces dual item y mar"
+    },
+    {
+      "id": 279,
+      "start": 2148.26,
+      "end": 2155.7400000000002,
+      "text": "cancia model y esto es para la conversión y la compatibilidad total con otros tipos de"
+    },
+    {
+      "id": 280,
+      "start": 2155.7400000000002,
+      "end": 2163.6600000000003,
+      "text": "surtidos puede ser entre parche a siel final chip pre ship en esto en cuestión por si se quiere"
+    },
+    {
+      "id": 281,
+      "start": 2163.6600000000003,
+      "end": 2171.3,
+      "text": "ampliar o se quiere crear algún cambio es muy fácil la implementación solamente se identificar"
+    },
+    {
+      "id": 282,
+      "start": 2171.82,
+      "end": 2178.34,
+      "text": "la nueva idea de negocio pero está todo listo para hacer cualquier cambio en líneas de tiempo pues"
+    },
+    {
+      "id": 283,
+      "start": 2178.34,
+      "end": 2189.0600000000004,
+      "text": "podemos identificar que la codificación completa se iniciará el 24 de noviembre las pruebas de"
+    },
+    {
+      "id": 284,
+      "start": 2189.0600000000004,
+      "end": 2194.7400000000002,
+      "text": "proceso que ya se están bueno la codificación ya estén iniciando nada más en las pruebas de"
+    },
+    {
+      "id": 285,
+      "start": 2194.7400000000002,
+      "end": 2201.0600000000004,
+      "text": "proceso que es el 10 de diciembre una liberación programada sería el 7 de enero conforme al calendario"
+    },
+    {
+      "id": 286,
+      "start": 2201.06,
+      "end": 2213.06,
+      "text": "de oficial de implementaciones y ahora continuamos en supuestos y restricciones como supuestos"
+    },
+    {
+      "id": 287,
+      "start": 2213.06,
+      "end": 2220.18,
+      "text": "tenemos que los servicios de salidas surtidos service y salida mercancía a service mantiene en"
+    },
+    {
+      "id": 288,
+      "start": 2220.18,
+      "end": 2227.58,
+      "text": "los contratos fijos compatibilidad completa entre los de teos y los módulos funciona por compatibilidad"
+    },
+    {
+      "id": 289,
+      "start": 2228.1,
+      "end": 2234.12,
+      "text": "y no se requeren cambios ni en base y o ni en salida service la arquitectura de"
+    },
+    {
+      "id": 290,
+      "start": 2234.12,
+      "end": 2240.8199999999997,
+      "text": "astrat payload procesor permanece sin cambios mayores ahora si como restricciones sólo se modifica"
+    },
+    {
+      "id": 291,
+      "start": 2240.8199999999997,
+      "end": 2247.74,
+      "text": "el full ship y un shortter no se puede modificar con tratos de servicios existentes se debe"
+    },
+    {
+      "id": 292,
+      "start": 2247.74,
+      "end": 2254.34,
+      "text": "mantener la compatibilidad con otros tipos de surtidos el procesamiento dual debe de ser"
+    },
+    {
+      "id": 293,
+      "start": 2254.34,
+      "end": 2264.94,
+      "text": "transparente para el sistema de consumidores porque es importante esta restricciones nos obligaron"
+    },
+    {
+      "id": 294,
+      "start": 2264.94,
+      "end": 2272.42,
+      "text": "a buscar una solución elegante resultado la implementación es de bajo riesgo que reutiliza"
+    },
+    {
+      "id": 295,
+      "start": 2272.42,
+      "end": 2281.9,
+      "text": "todo el existente se aura impacto en otros procesos de surtido y como breve tenemos estos"
+    },
+    {
+      "id": 296,
+      "start": 2281.9,
+      "end": 2289.62,
+      "text": "hallazgos en el análisis durante el análisis identificamos hallazgos importantes por por"
+    },
+    {
+      "id": 297,
+      "start": 2289.62,
+      "end": 2298.58,
+      "text": "rol el desarrollador arquitectura existente probada y funcional recomendación mantener la"
+    },
+    {
+      "id": 298,
+      "start": 2298.58,
+      "end": 2304.86,
+      "text": "compatibilidad con apsat payload procesor en cuestión de los tercers el gap sería el que te"
+    },
+    {
+      "id": 299,
+      "start": 2304.86,
+      "end": 2311.7400000000002,
+      "text": "lo he aceptado no está implementado recomendación implementar pruebas exapsivas para ese"
+    },
+    {
+      "id": 300,
+      "start": 2311.7400000000002,
+      "end": 2319.94,
+      "text": "narío dual para el arquitecto conversión implícita del deteo a modulos funciona como recomendación"
+    },
+    {
+      "id": 301,
+      "start": 2319.94,
+      "end": 2327.94,
+      "text": "no modificar los deteos ni modulos existentes como operaciones dependencia manual para"
+    },
+    {
+      "id": 302,
+      "start": 2328.94,
+      "end": 2337.7400000000002,
+      "text": "generar cuelos de botella como recomendación automatizar el proceso completo para eliminar"
+    },
+    {
+      "id": 303,
+      "start": 2337.7400000000002,
+      "end": 2344.82,
+      "text": "la intervención manual y como conclusión el problema no era técnico la arquitectura ya"
+    },
+    {
+      "id": 304,
+      "start": 2344.82,
+      "end": 2352.02,
+      "text": "estabalista y el gap era funcional faltaba implementar solamente el que te la aceptación 2 y como"
+    },
+    {
+      "id": 305,
+      "start": 2352.02,
+      "end": 2359.06,
+      "text": "solución agregar el puente para conectar a vos servicios por así como resultado la automatización"
+    },
+    {
+      "id": 306,
+      "start": 2359.06,
+      "end": 2372.3,
+      "text": "es ringenería y como cierre es le puedo decir ahora sí que ni resumen de contexto general"
+    },
+    {
+      "id": 307,
+      "start": 2372.82,
+      "end": 2387.6200000000003,
+      "text": "como contexto breve pues ahora sí que la arquitectura está estable sólo hay ahora sí que se"
+    },
+    {
+      "id": 308,
+      "start": 2387.6200000000003,
+      "end": 2394.7400000000002,
+      "text": "puede decir que hoy solamente corremos una la fase de subtido la confirmación final se atiende"
+    },
+    {
+      "id": 309,
+      "start": 2394.74,
+      "end": 2404.3799999999997,
+      "text": "fuera del flujo podemos incrementar el procesamiento dual integrar el procesamiento dual se"
+    },
+    {
+      "id": 310,
+      "start": 2404.3799999999997,
+      "end": 2410.3399999999997,
+      "text": "coincial dentro del ropa pelo a procesor que es en el módulo de full ship y un esórter primero se"
+    },
+    {
+      "id": 311,
+      "start": 2410.3399999999997,
+      "end": 2416.8199999999997,
+      "text": "ejecutan lo que es el salida a su artido service y al terminar ok se ejecuta salida a mercancía"
+    },
+    {
+      "id": 312,
+      "start": 2417.82,
+      "end": 2425.1400000000003,
+      "text": "ahora sí como beneficios así se puede decir rapidez menos errores mejor trazabilidad"
+    },
+    {
+      "id": 313,
+      "start": 2425.1400000000003,
+      "end": 2434.94,
+      "text": "reducción de tiempos y ahora sí que sería en sí todo por lo que les puedo presentar"
+    },
+    {
+      "id": 314,
+      "start": 2434.94,
+      "end": 2440.82,
+      "text": "no sé si tienen alguna duda aclaración no sé si fue muy rápido si mediante"
+    },
+    {
+      "id": 315,
+      "start": 2441.82,
+      "end": 2452.1000000000004,
+      "text": "perdón Rafael, nada más para complementar en esta segunda propuesta de mejor a ti básicamente"
+    },
+    {
+      "id": 316,
+      "start": 2452.1000000000004,
+      "end": 2460.9,
+      "text": "estaríamos pues igualando lo que el compañero francés convencionó en su propuesta si bien"
+    },
+    {
+      "id": 317,
+      "start": 2460.9,
+      "end": 2465.7000000000003,
+      "text": "envuelvecamos a una fecha de liberación para enero estaríamos de igual manera buscando que"
+    },
+    {
+      "id": 318,
+      "start": 2465.7,
+      "end": 2472.58,
+      "text": "esta sucediera pues antes pero vayas a respetando dicho calendario nos salientas tenero ya"
+    },
+    {
+      "id": 319,
+      "start": 2472.58,
+      "end": 2477.06,
+      "text": "lo demás pues ya sería cuestión de que se comete internamente si nos dan los verdes pues"
+    },
+    {
+      "id": 320,
+      "start": 2477.06,
+      "end": 2482.2599999999998,
+      "text": "lo haríamos pues a la brevedad en la media lo posible lo estaríamos buscando para que sucediera"
+    },
+    {
+      "id": 321,
+      "start": 2482.2599999999998,
+      "end": 2489.22,
+      "text": "en diciembre ahora sí adelante quien guste y tenga preguntas que sea la palabra"
+    },
+    {
+      "id": 322,
+      "start": 2495.7,
+      "end": 2512.7,
+      "text": "no más una duda al inicio del del requerimiento de este por decirlo sí vi que decía que sólo"
+    },
+    {
+      "id": 323,
+      "start": 2512.7,
+      "end": 2517.4199999999996,
+      "text": "contemplar el tema de un esórter por full chip confirmes correcto"
+    },
+    {
+      "id": 324,
+      "start": 2517.42,
+      "end": 2528.3,
+      "text": "exactamente está en lo correcto solamente considera el full chip y las parcialidades exactamente el"
+    },
+    {
+      "id": 325,
+      "start": 2528.3,
+      "end": 2538.02,
+      "text": "parcial se según yo ya funciona esa parte pero tengo que este requerimiento es también para"
+    },
+    {
+      "id": 326,
+      "start": 2538.02,
+      "end": 2546.46,
+      "text": "contemplar si hay una full chip me procesarla no remover la parcial pues es así como tú lo"
+    },
+    {
+      "id": 327,
+      "start": 2546.46,
+      "end": 2555.42,
+      "text": "dices dufina este de full chip nos estaba ocupando de hecho si se tenía pensado pero no estaba"
+    },
+    {
+      "id": 328,
+      "start": 2555.42,
+      "end": 2564.3,
+      "text": "correcto y lo que se hizo fue reutilizar el código de lo que era la parcial y el final y lo que"
+    },
+    {
+      "id": 329,
+      "start": 2564.3,
+      "end": 2573.46,
+      "text": "si se fue ahora siempre realizar el código completo del del full chip y hacerlo los criterios de"
+    },
+    {
+      "id": 330,
+      "start": 2573.46,
+      "end": 2579.78,
+      "text": "aceptación conforme lo que nos habían pasado sí básicamente o sea para lo que sea la parcial también"
+    },
+    {
+      "id": 331,
+      "start": 2579.78,
+      "end": 2586.38,
+      "text": "hacerlo en la full exactamente por eso es el procesamiento dual y que más era la duda porque como"
+    },
+    {
+      "id": 332,
+      "start": 2586.38,
+      "end": 2592.02,
+      "text": "vi sólo full chip me dije pues con que no se quita el procesamiento de la parcial todo bien"
+    },
+    {
+      "id": 333,
+      "start": 2592.02,
+      "end": 2600.1,
+      "text": "si quieres regresar al diagrama y ahí creo nada más el cambio va a estar"
+    },
+    {
+      "id": 334,
+      "start": 2600.66,
+      "end": 2607.38,
+      "text": "y no sí esto ya con eso era ahí si quieres puedes ver en la pantalla que dice fase 1 y fase 2"
+    },
+    {
+      "id": 335,
+      "start": 2608.2599999999998,
+      "end": 2616.42,
+      "text": "antes solamente se ejecutaba lo que era la fase 1 pero lo que faltaba era la fase 2 entonces lo que"
+    },
+    {
+      "id": 336,
+      "start": 2616.42,
+      "end": 2624.18,
+      "text": "sí hizo fue ahora lo que se tiene que hacer es implementar lo que tiene los criterios de aceptación"
+    },
+    {
+      "id": 337,
+      "start": 2624.5,
+      "end": 2630.8199999999997,
+      "text": "ocupar el código existente y hacer el nuevo servicio funcional y este diagrama te muestra"
+    },
+    {
+      "id": 338,
+      "start": 2630.8199999999997,
+      "end": 2637.62,
+      "text": "brevemente el resumen del del criterio de aceptación 2 y el criterio de aceptación 1 y también la"
+    },
+    {
+      "id": 339,
+      "start": 2637.62,
+      "end": 2644.1,
+      "text": "trazabilidad del criterio de aceptación 3 ahora sí que ese es el plan integral de todo lo requerido"
+    },
+    {
+      "id": 340,
+      "start": 2644.1,
+      "end": 2651.62,
+      "text": "pero ahora sí que darle este hoy de esta aplicación se puede decir para que haga todo ese"
+    },
+    {
+      "id": 341,
+      "start": 2651.62,
+      "end": 2656.42,
+      "text": "procesamiento ok salva les gusta gracias"
+    },
+    {
+      "id": 342,
+      "start": 2662.1,
+      "end": 2666.98,
+      "text": "alguna otra duda alguien que quiera levantar la malita pregunta"
+    },
+    {
+      "id": 343,
+      "start": 2666.98,
+      "end": 2680.54,
+      "text": "pues si no hay más dudas creo que es todo equipo por ahí mandamos la minuta el día de hoy junto con"
+    },
+    {
+      "id": 344,
+      "start": 2680.54,
+      "end": 2686.9,
+      "text": "la presentación en formato pdf y se las compartimos yo creo que por la terrecita porque ya se"
+    },
+    {
+      "id": 345,
+      "start": 2686.9,
+      "end": 2691.38,
+      "text": "lo tiene la verdad la comida porque aprovechita todos un excelente miércoles y que tengan"
+    },
+    {
+      "id": 346,
+      "start": 2691.38,
+      "end": 2693.38,
+      "text": "bonitas semanas hasta luego"
+    }
+  ],
+  "filename": "whisper_fa24e6717ed7456bb1337dfa72342d54_Segunda_Sesión_propuesta_de_solución.wmv",
+  "duration": 0,
+  "created_at": "2025-11-26T14:45:04.344089"
+}
